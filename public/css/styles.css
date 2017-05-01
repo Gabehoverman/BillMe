@@ -1,0 +1,14 @@
+.blurb-container {
+    background: white;
+    border-radius: 5px;
+    border: 2px gray solid;
+    padding: 10px 20px;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
