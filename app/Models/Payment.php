@@ -19,7 +19,7 @@ class Payment extends Model
      * @var array
      */
     protected $fillable = [
-        'id','recipient_id','tenant_id','image_url','approved'
+        'id','recipient_id','tenant_id','payment_date','image_url','approved','notes'
     ];
 
     /**
@@ -44,7 +44,7 @@ class Payment extends Model
         return $this->belongsTo('tenant');
     }
 
-    public function utility() {
-        return $this->belongsTo('utility');
-    }
+    /*public function utility() {
+        return $this->belongsTo('Utility');
+    }*/
 }

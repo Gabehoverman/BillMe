@@ -9,6 +9,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../bulma/css/bulma.css">
+
 
         <!-- Styles -->
         <style>
@@ -65,31 +67,30 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+
+
+        <section class="hero is-success is-fullheight">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/admin/dashboard') }}">Home</a>
                     @else
                         <a href="{{ url('/login') }}">Login</a>
                         <a href="{{ url('/register') }}">Register</a>
                     @endif
                 </div>
             @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title">
+                        House Mate
+                    </h1>
+                    <h2 class="subtitle">
+                        Multi-Tenant House Management Software
+                    </h2>
                 </div>
             </div>
-        </div>
+        </section>
+
     </body>
 </html>

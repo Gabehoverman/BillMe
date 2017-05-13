@@ -18,8 +18,11 @@ class Bill extends Migration
             $table->integer('utility_id');
             $table->double('amount');
             $table->date('bill_date');
+            $table->date('due_date');
+            $table->string('month');
             $table->string('image_url');
             $table->boolean('active');
+            $table->string('notes');
         });
     }
 

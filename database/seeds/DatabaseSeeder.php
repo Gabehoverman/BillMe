@@ -35,10 +35,21 @@ class UserLoginSeeder extends Seeder
         $admin = array([
            'name' => 'Gabe',
             'email' => 'Hoverman@Marshall.edu',
-            "password"=> Hash::make('password')
+            "password"=> Hash::make('password'),
+            'role' => 'Admin',
+            'tenant_id' => 1
+        ]);
+
+        $tenant = array([
+            'name' => 'Tyrell',
+            'email' => 'TyrellCarlton@Marshall.edu',
+            "password"=> Hash::make('password'),
+            'role' => 'Tenant',
+            'tenant_id' => 2
         ]);
 
         DB::table('users')->insert($admin);
+        DB::table('users')->insert($tenant);
     }
 }
 
@@ -151,7 +162,7 @@ class UtilitySeederClass extends Seeder
             'home_id' => 1
         ]);
 
-        DB::table('utility')->insert($water,$sewage,$electric,$gas,$internet);
+        DB::table('utility')->insert($water);
         DB::table('utility')->insert($sewage);
         DB::table('utility')->insert($electric);
         DB::table('utility')->insert($gas);
@@ -176,6 +187,136 @@ class BillSeederClass extends Seeder
     public function run() {
 
         //
+        $waterbill = array([
+            'id' => 1,
+            'utility_id' => 1,
+            'amount' => 180.27,
+            'bill_date' => '2017-05-12',
+            'due_date' => '2017-05-29',
+            'month' => 'May',
+            'image_url' => 'hello world',
+            'active' => 0,
+            'notes' => ' '
+        ]);
+
+        $waterbill2 = array([
+            'id' => 6,
+            'utility_id' => 1,
+            'amount' => 180.27,
+            'bill_date' => '2017-04-12',
+            'due_date' => '2017-04-29',
+            'month' => 'April',
+            'image_url' => 'hello world',
+            'active' => 0,
+            'notes' => ' '
+        ]);
+
+        $sewagebill = array([
+            'id' => 2,
+            'utility_id' => 2,
+            'amount' => 76.65,
+            'bill_date' => '2017-05-12',
+            'due_date' => '2017-05-29',
+            'month' => 'May',
+            'image_url' => 'hello world',
+            'active' => 0,
+            'notes' => ' '
+        ]);
+
+        $sewagebill2 = array([
+            'id' => 7,
+            'utility_id' => 2,
+            'amount' => 76.65,
+            'bill_date' => '2017-04-12',
+            'due_date' => '2017-04-29',
+            'month' => 'April',
+            'image_url' => 'hello world',
+            'active' => 0,
+            'notes' => ' '
+        ]);
+
+        $electricbill = array([
+            'id' => 3,
+            'utility_id' => 3,
+            'amount' => 192.47,
+            'bill_date' => '2017-05-12',
+            'due_date' => '2017-05-29',
+            'month' => 'May',
+            'image_url' => 'hello world',
+            'active' => 0,
+            'notes' => ' '
+        ]);
+
+        $electricbill2 = array([
+            'id' => 8,
+            'utility_id' => 3,
+            'amount' => 192.47,
+            'bill_date' => '2017-04-12',
+            'due_date' => '2017-04-29',
+            'month' => 'April',
+            'image_url' => 'hello world',
+            'active' => 0,
+            'notes' => ' '
+        ]);
+
+        $gasbill = array([
+            'id' => 4,
+            'utility_id' => 4,
+            'amount' => 207.92,
+            'bill_date' => '2017-05-12',
+            'due_date' => '2017-05-29',
+            'month' => 'May',
+            'image_url' => 'hello world',
+            'active' => 0,
+            'notes' => ' '
+        ]);
+
+        $gasbill2 = array([
+            'id' => 9,
+            'utility_id' => 4,
+            'amount' => 207.92,
+            'bill_date' => '2017-04-12',
+            'due_date' => '2017-04-29',
+            'month' => 'April',
+            'image_url' => 'hello world',
+            'active' => 0,
+            'notes' => ' '
+        ]);
+
+        $internetbill = array([
+            'id' => 5,
+            'utility_id' => 5,
+            'amount' => 70.66,
+            'bill_date' => '2017-05-12',
+            'due_date' => '2017-05-29',
+            'month' => 'May',
+            'image_url' => 'hello world',
+            'active' => 0,
+            'notes' => ' '
+        ]);
+
+        $internetbill2 = array([
+            'id' => 10,
+            'utility_id' => 5,
+            'amount' => 70.66,
+            'bill_date' => '2017-04-12',
+            'due_date' => '2017-04-29',
+            'month' => 'April',
+            'image_url' => 'hello world',
+            'active' => 0,
+            'notes' => ' '
+        ]);
+
+        DB::table('bill')->insert($waterbill);
+        DB::table('bill')->insert($sewagebill);
+        DB::table('bill')->insert($electricbill);
+        DB::table('bill')->insert($gasbill);
+        DB::table('bill')->insert($internetbill);
+        DB::table('bill')->insert($waterbill2);
+        DB::table('bill')->insert($sewagebill2);
+        DB::table('bill')->insert($electricbill2);
+        DB::table('bill')->insert($gasbill2);
+        DB::table('bill')->insert($internetbill2);
 
         $this->command->info('Bill Table Seeded');
     }

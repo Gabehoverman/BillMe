@@ -12,21 +12,23 @@ use App\Models\Home;
 
 class AdminController extends Controller
 {
+
     public function dashboard()
     {
 
         //Get user information, tenant id, and home id
         $user = Auth::user();
-        $tenant_info = Tenant::all()->where('name', '=', $user->name);
-        $tenant_id = $tenant_info[0]->home_id;
-        $home = Home::all()->find($tenant_id);
+        $tenant = Tenant::all()->where('id','=',$user->tenant_id);
+        foreach ($tenant as $t)
+            $home = Home::all()->where('id','=',$t->home_id);
+        foreach ($home as $h)
+            $home = $h;
 
         //Find all payments Tenant has made and sum
-        $payments = Payment::all()->where('tenant_id', '=', $tenant_id);
+        $payments = Payment::all()->where('tenant_id', '=', $user->tenant_id);
         $payment_total = 0;
-        foreach ($payments as $payment) {
+        foreach ($payments as $payment)
             $payment_total = $payment_total + $payment->amount;
-        }
 
         //Find all bills home has and sum
         $utilities = Utility::all()->where('home_id', '=', $home->id);
@@ -37,33 +39,60 @@ class AdminController extends Controller
                 $bill_total = $bill_total + $b->amount;
             }
         }
-        //$bills = Bill::all()->where('utility_id','=',$utilities[0]->id);
 
+        $date = getdate();
+        $prevMonth = date("F", strtotime($date['month'] . " last month"));
+
+        $eachUtil = array();
+        foreach($utilities as $ut) {
+            $bill = Bill::all()->where('utility_id','=',$ut->id)->where('month','=',$date['month']);
+            foreach ($bill as $b) {
+                $eachUtil[$ut->name] = $b;
+            }
+        }
+        $prevUtil = array();
+        foreach($utilities as $ut) {
+            $bill = Bill::all()->where('utility_id','=',$ut->id)->where('month','=',$prevMonth);
+            foreach ($bill as $b) {
+                $prevUtil[$ut->name] = $b;
+            }
+        }
+
+
+
+
+        //Get all tenants
+        $tenants = Tenant::all()->where('home_id','=',$home->id);
+        $bill_total = $bill_total/sizeof($tenants);
 
         //Calculates difference between payments and bills to find owage.
         $user_total = $payment_total - $bill_total;
 
-        //Find most recent payments
-        $recent_payments = Payment::all()->sortBy('id');
+        //Find total for utilities for current month
+        $date = getdate();
+        $monthly_util_sum = 0;
+        $month_util = Bill::all();
+        foreach ($month_util as $m) {
+            if ($m['month'] == $date['month']) {
+                $monthly_util_sum = $monthly_util_sum + $m->amount;
+            } else {
 
-        //Get all tenants
-        $tenants = Tenant::all()->where('home_id', $home->id);
+            }
+        }
 
         //Pass data to view
         $data = array(
-            'name' => 'Gabe',
-            'user' => $user,
             'bill' => $user_total,
-            'recent_payments' => $recent_payments,
-            'tenants' => $tenants
-
+            'monthly_util_sum' => $monthly_util_sum,
+            'eachUtil' => $eachUtil,
+            'prevUtil' => $prevUtil,
+            'payments' => $payment_total
         );
-        return view('admin/dashboard', $data);
+        return view('admin/home', $data);
     }
 
     public function addBill()
     {
-
         $data = array();
 
         $bill = new Bill();
@@ -71,6 +100,8 @@ class AdminController extends Controller
 
         $utilities = Utility::all();
         $data['utilities'] = $utilities;
+
+        $data['success'] = 'False';
 
         return view('admin/bill-form', $data);
     }
@@ -86,11 +117,15 @@ class AdminController extends Controller
             $bill = new Bill();
         }
 
+
         $bill->amount = $req->get('amount', '');
-        $bill->bill_date = new \DateTime($req->get("due_date"));
-        $bill->utility_id = $req->get('recipient', '');
+        $bill->bill_date = new \DateTime($req->get("bill_date"));
+        $bill->due_date = new \DateTime($req->get('due_date'));
+        $bill->utility_id = $req->get('recipient','');
         $bill->image_url = "hello world";
+        $bill->month = $req->get('month');
         $bill->active = false;
+        $bill->notes = $req->get('notes');
 
         $bill->save();
         $data['bill'] = $bill;
@@ -98,9 +133,12 @@ class AdminController extends Controller
         $utilities = Utility::all();
         $data['utilities'] = $utilities;
 
+        $data['success'] = 'True';
+
         return view('admin/bill-form', $data);
 
     }
+
 
     public function addPayment()
     {
@@ -112,8 +150,10 @@ class AdminController extends Controller
         $utilities = Utility::all();
         $data['utilities'] = $utilities;
 
+        $data['success'] = 'False';
         return view('admin/payment-form',$data);
     }
+
 
     public function updatePayment(Request $req)
     {
@@ -129,8 +169,10 @@ class AdminController extends Controller
         $payment->tenant_id = Auth::user()->id;
         $payment->amount = $req->get('amount');
         $payment->recipient_id = $req->get('recipient');
+        $payment->payment_date = new \DateTime($req->get("due_date"));
         $payment->image_url = 'null';
         $payment->approved = false;
+        $payment->notes = $req->get('notes');
 
         $payment->save();
 
@@ -138,7 +180,87 @@ class AdminController extends Controller
         $data['utilities'] = $utilities;
         $data['payment'] = $payment;
 
+        $data['success'] = 'True';
+
         return view('admin/payment-form',$data);
     }
+
+    public function bills() {
+
+        $bills = Bill::all();
+        foreach($bills as $bill) {
+            $utilities = Utility::all();
+            foreach($utilities as $util)
+            if ($bill->utility_id == $util->id) {
+                $bill['utility'] = $util->name;
+            }
+        }
+        $data['bills'] = $bills;
+
+        return view('admin/bills',$data);
+    }
+
+    public function payments() {
+        $payments = Payment::all();
+        foreach($payments as $payment) {
+            $tenant = Tenant::all()->where('id','=',$payment->tenant_id);
+            foreach ($tenant as $t) {
+                $tenant = $t;
+            }
+            $payment['tenant'] = $tenant->name;
+            $utilities = Utility::all();
+            foreach($utilities as $util) {
+                if ($payment->recipient_id == $util->id) {
+                    $payment['utility'] = $util->name;
+                }
+            }
+        }
+        $data['payments'] = $payments;
+
+        return view('admin/payment',$data);
+    }
+
+    public function tenants() {
+        $user = Auth::user();
+        $tenant_info = Tenant::all()->where('id','=',$user->tenant_id);
+        foreach ($tenant_info as $t) {
+            $tenant_info = $t;
+        }
+        $home = Home::all()->where('id','=',$tenant_info->home_id);
+        foreach ($home as $h)
+            $home = $h;
+        $data['home'] = $home->name;
+        $tenants = Tenant::all()->where('home_id','=',$home->id);
+        $data['tenants'] = $tenants;
+
+        return view('admin/tenants',$data);
+    }
+
+    public function settings() {
+
+        $user = Auth::user();
+        $tenant_info = Tenant::all()->where('id','=',$user->tenant_id);
+        foreach ($tenant_info as $t)
+            $tenant_info = $t;
+        $home = Home::all()->where('id','=',$tenant_info->home_id);
+        foreach ($home as $h)
+            $home = $h;
+
+
+        $data['user'] = $user;
+        $data['tenant'] = $tenant_info;
+        $data['home'] = $home;
+
+
+        return view('admin/settings',$data);
+    }
+
+    public function logout() {
+        Auth::logout();
+
+        return view('Auth/login');
+    }
+
+
 
 }

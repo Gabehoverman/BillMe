@@ -21,6 +21,8 @@
     <link href="../assets/css/style.css" rel="stylesheet">
     <link href="../assets/css/style-responsive.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="/node_modules/bulma/css/bulma.css">
+
     
 
     <script src="../assets/js/chart-master/Chart.js"></script>

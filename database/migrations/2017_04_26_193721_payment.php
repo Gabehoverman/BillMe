@@ -18,8 +18,10 @@ class Payment extends Migration
             $table->integer('amount');
             $table->integer('tenant_id');
             $table->integer('recipient_id');
+            $table->date('payment_date');
             $table->string('image_url');
             $table->boolean('approved');
+            $table->string('notes');
         });
     }
 

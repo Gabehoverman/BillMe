@@ -1,150 +1,124 @@
-@extends('layouts.aside)
+@extends('layouts.aside')
 
 @section('content')
-<div class="content column is-10">
-    <div class="title is-2">Overview</div>
-    <div class="nav menu">
-        <div class="container">
-            <div class="nav-left">
-                <a class="nav-item is-tab is-active"><span class="icon-btn"><i class="fa fa-plus"></i></span></a>
-                <a class="nav-item is-tab">
-              <span class="icon-btn">
-                <i class="fa fa-print"></i>
-              </span>
-                </a>
-                <a class="nav-item is-tab">
-              <span class="icon-btn thin">
-                <i class="fa fa-lock"></i>
-              </span>
-                </a>
-                <a class="nav-item is-tab">
-              <span class="icon-btn">
-                <i class="fa fa-trash"></i>
-              </span>
-                </a>
-                <div class="nav-item is-tab">
-                    <strong>2 items selected</strong>
+    <div class="columns mid-column">
+<div class="content column is-11">
+    <div class="title is-2">Dashboard</div>
+    <div class="tile is-ancestor">
+        <div class="tile is-vertical is-18">
+            <div class="tile">
+                <div class="tile is-parent is-vertical">
+                    <article class="tile is-child box">
+                        <h3>Total Monthly Utilities</h3>
+                        <h1><a class="green">${{$monthly_util_sum}}</a></h1>
+                    </article>
+                    <article class="tile is-child box">
+                        <h3>Your Share</h3>
+                        <h1><a class="green">${{$monthly_util_sum/5}}</a></h1>
+                    </article>
+                </div>
+                <div class="tile is-parent is-8">
+                    <article class="tile is-child box">
+                        <div class="columns">
+                            <div class=" column">
+                               <h2>Status</h2>
+                                @if ($bill < 0)
+                                    <div class="content">
+
+                                        <h1><a class="red">You owe ${{$bill * -1}}</a></h1>
+                                    </div>
+                                @else
+                                    <div class="content">
+                                        <h1><a class="red">You're ahead ${{$bill}}</a></h1>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
-            <div class="nav-right is-hidden-mobile">
-                <a class="nav-item is-tab">Name</a>
-                <a class="nav-item is-tab">Size</a>
-                <a class="nav-item is-tab">Views</a>
-                <a class="nav-item"><span class=" button is-success">Uploaded</span></a>
+            <div class="tile is-parent">
+                <article class="tile is-child box">
+                    <h2 class="center">Current Month's Utilities</h2>
+                    <div class="column">
+                        <nav class="level is-mobile">
+                            <div class="level-item has-text-centered">
+                                <div>
+                                    <p class="heading">Water</p>
+                                    <p class="title">${{$eachUtil['Water']->amount}}</p>
+                                </div>
+                            </div>
+                            <div class="level-item has-text-centered">
+                                <div>
+                                    <p class="heading">Sewage</p>
+                                    <p class="title">${{$eachUtil['Sewage']->amount}}</p>
+                                </div>
+                            </div>
+                            <div class="level-item has-text-centered">
+                                <div>
+                                    <p class="heading">Electric</p>
+                                    <p class="title">${{$eachUtil['Electric']->amount}}</p>
+                                </div>
+                            </div>
+                            <div class="level-item has-text-centered">
+                                <div>
+                                    <p class="heading">Gas</p>
+                                    <p class="title">${{$eachUtil['Gas']->amount}}</p>
+                                </div>
+                            </div>
+                            <div class="level-item has-text-centered">
+                                <div>
+                                    <p class="heading">Internet</p>
+                                    <p class="title">${{$eachUtil['Internet']->amount}} </p>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </article>
             </div>
-        </div>
-    </div>
-    <div class="columns files">
-        <div class="column is-2">
-            <a class="file">
-                <div class="image is-3by2">
-                    <img src="https://images.unsplash.com/photo-1467321638755-7246fd0dc1f3?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1125&q=80">
-                </div>
-                <div class="name">swimmin.jpeg</div>
-                <div class="timestamp">2 hours ago</div>
-            </a>
-            <a class="file">
-                <div class="image is-3by2">
-                    <img src="https://images.unsplash.com/photo-1467321638755-7246fd0dc1f3?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1125&q=80">
-                </div>
-                <div class="name">swimmin.jpeg</div>
-                <div class="timestamp">2 hours ago</div>
-            </a>
-            <a class="file">
-                <div class="image is-3by2">
-                    <img src="https://source.unsplash.com/category/nature/640x480">
-                </div>
-                <div class="name">daisydaisydaisyuntitled.jpeg</div>
-                <div class="timestamp">2 hours ago</div>
-            </a>
-        </div>
-        <div class="column is-2">
-            <a class="file active">
-                <div class="image is-3by2">
-                    <img src="https://source.unsplash.com/category/buildings/640x480">
-                </div>
-                <div class="name">untitled.jpeg</div>
-                <div class="timestamp">2 minutes ago</div>
-            </a>
-            <a class="file">
-                <div class="image is-3by2">
-                    <img src="https://source.unsplash.com/category/nature/640x480">
-                </div>
-                <div class="name">daisydaisydaisyuntitled.jpeg</div>
-                <div class="timestamp">2 hours ago</div>
-            </a>
-            <a class="file">
-                <div class="image is-3by2">
-                    <img src="https://images.unsplash.com/photo-1467321638755-7246fd0dc1f3?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1125&q=80">
-                </div>
-                <div class="name">swimmin.jpeg</div>
-                <div class="timestamp">2 hours ago</div>
-            </a>
-        </div>
-        <div class="column is-2">
-            <a class="file active">
-                <div class="image is-3by2">
-                    <img src="https://source.unsplash.com/category/food/640x480">
-                </div>
-                <div class="name">splashsplash.jpeg</div>
-                <div class="timestamp">2 hours ago</div>
-            </a>
-            <a class="file">
-                <div class="image is-3by2">
-                    <img src="https://source.unsplash.com/category/nature/640x480">
-                </div>
-                <div class="name">untitled.jpeg</div>
-                <div class="timestamp">2 hours ago</div>
-            </a>
-        </div>
-        <div class="column is-2">
-            <a class="file">
-                <div class="image is-3by2">
-                    <img src="https://source.unsplash.com/category/objects/640x480">
-                </div>
-                <div class="name">untitled.jpeg</div>
-                <div class="timestamp">2 hours ago</div>
-            </a>
-            <a class="file">
-                <div class="image is-3by2">
-                    <img src="https://images.unsplash.com/photo-1467321638755-7246fd0dc1f3?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1125&q=80">
-                </div>
-                <div class="name">swimmin.jpeg</div>
-                <div class="timestamp">2 hours ago</div>
-            </a>
-        </div>
-        <div class="column is-2">
-            <a class="file">
-                <div class="image is-3by2">
-                    <img src="https://source.unsplash.com/category/people/640x480">
-                </div>
-                <div class="name">untitled.jpeg</div>
-                <div class="timestamp">2 hours ago</div>
-            </a>
-            <a class="file">
-                <div class="image is-3by2">
-                    <img src="https://source.unsplash.com/category/objects/640x480">
-                </div>
-                <div class="name">swimmin.jpeg</div>
-                <div class="timestamp">2 hours ago</div>
-            </a>
-        </div>
-        <div class="column is-2">
-            <a class="file">
-                <div class="image is-3by2">
-                    <img src="https://source.unsplash.com/category/nature/640x480">
-                </div>
-                <div class="name">untitled.jpeg</div>
-                <div class="timestamp">2 hours ago</div>
-            </a>
-            <a class="file">
-                <div class="image is-3by2">
-                    <img src="https://source.unsplash.com/category/people/640x480">
-                </div>
-                <div class="name">untitled.jpeg</div>
-                <div class="timestamp">2 hours ago</div>
-            </a>
+            <div class="tile is-parent">
+                <article class="tile is-child box">
+                    <h2 class="center">Previous Month's Utilities</h2>
+                    <div class="column">
+                        <nav class="level is-mobile">
+                            <div class="level-item has-text-centered">
+                                <div>
+                                    <p class="heading">Water</p>
+                                    <p class="title">${{$prevUtil['Water']->amount}}</p>
+                                </div>
+                            </div>
+                            <div class="level-item has-text-centered">
+                                <div>
+                                    <p class="heading">Sewage</p>
+                                    <p class="title">${{$prevUtil['Sewage']->amount}}</p>
+                                </div>
+                            </div>
+                            <div class="level-item has-text-centered">
+                                <div>
+                                    <p class="heading">Electric</p>
+                                    <p class="title">${{$prevUtil['Electric']->amount}}</p>
+                                </div>
+                            </div>
+                            <div class="level-item has-text-centered">
+                                <div>
+                                    <p class="heading">Gas</p>
+                                    <p class="title">${{$prevUtil['Gas']->amount}}</p>
+                                </div>
+                            </div>
+                            <div class="level-item has-text-centered">
+                                <div>
+                                    <p class="heading">Internet</p>
+                                    <p class="title">${{$prevUtil['Internet']->amount}} </p>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </article>
+            </div>
         </div>
     </div>
 </div>
+    </div>
+
+
 @endsection
