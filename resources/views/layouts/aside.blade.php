@@ -29,17 +29,20 @@
         <span></span>
       </span>
         <div class="nav-right nav-menu is-hidden-tablet">
-            <a class="nav-item is-tab is-active">
+            <a href="/admin/dashboard" class="nav-item is-tab">
                 Dashboard
             </a>
-            <a class="nav-item is-tab is-active">
+            <a href="/admin/bills" class="nav-item is-tab">
                 Bills
             </a>
-            <a class="nav-item is-tab">
+            <a href="/admin/payments" class="nav-item is-tab">
                 Payments
             </a>
-            <a class="nav-item is-tab">
+            <a href="/admin/tenants" class="nav-item is-tab">
                 Tenants
+            </a>
+            <a href="/admin/settings" class="nav-item is-tab">
+                Settings
             </a>
         </div>
     </div>

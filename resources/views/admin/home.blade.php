@@ -45,31 +45,31 @@
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Water</p>
-                                    <p class="title">${{$eachUtil['Water']->amount}}</p>
+                                    <p class="title mobile">${{$eachUtil['Water']->amount}}</p>
                                 </div>
                             </div>
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Sewage</p>
-                                    <p class="title">${{$eachUtil['Sewage']->amount}}</p>
+                                    <p class="title mobile">${{$eachUtil['Sewage']->amount}}</p>
                                 </div>
                             </div>
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Electric</p>
-                                    <p class="title">${{$eachUtil['Electric']->amount}}</p>
+                                    <p class="title mobile">${{$eachUtil['Electric']->amount}}</p>
                                 </div>
                             </div>
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Gas</p>
-                                    <p class="title">${{$eachUtil['Gas']->amount}}</p>
+                                    <p class="title mobile">${{$eachUtil['Gas']->amount}}</p>
                                 </div>
                             </div>
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Internet</p>
-                                    <p class="title">${{$eachUtil['Internet']->amount}} </p>
+                                    <p class="title mobile">${{$eachUtil['Internet']->amount}} </p>
                                 </div>
                             </div>
                         </nav>
@@ -84,31 +84,31 @@
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Water</p>
-                                    <p class="title">${{$prevUtil['Water']->amount}}</p>
+                                    <p class="title mobile">${{$prevUtil['Water']->amount}}</p>
                                 </div>
                             </div>
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Sewage</p>
-                                    <p class="title">${{$prevUtil['Sewage']->amount}}</p>
+                                    <p class="title mobile">${{$prevUtil['Sewage']->amount}}</p>
                                 </div>
                             </div>
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Electric</p>
-                                    <p class="title">${{$prevUtil['Electric']->amount}}</p>
+                                    <p class="title mobile">${{$prevUtil['Electric']->amount}}</p>
                                 </div>
                             </div>
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Gas</p>
-                                    <p class="title">${{$prevUtil['Gas']->amount}}</p>
+                                    <p class="title mobile">${{$prevUtil['Gas']->amount}}</p>
                                 </div>
                             </div>
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Internet</p>
-                                    <p class="title">${{$prevUtil['Internet']->amount}} </p>
+                                    <p class="title mobile">${{$prevUtil['Internet']->amount}} </p>
                                 </div>
                             </div>
                         </nav>

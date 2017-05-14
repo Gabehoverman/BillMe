@@ -188,4 +188,8 @@ a.file:not(.button) {
   .form-column {
     max-width: 600px;
   }
+
+  .mobile {
+    font-size: 12pt;
+  }
 }
