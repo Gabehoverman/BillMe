@@ -7125,4 +7125,142 @@ label.panel-block:hover {
   background-color: whitesmoke;
   padding: 3rem 1.5rem 6rem;
 }
+
+#welcome-hero {
+  background: linear-gradient(
+          rgba(0, 209, 178, .9),
+          rgba(0, 209, 178, .9)
+  ),
+    /* bottom, image */
+  url('../../assets/img/victorian.png') no-repeat center center fixed;
+}
+
+hr {
+  color: white;
+  max-width: 50px;
+  border-style: none;
+  background-color: white;
+}
+
+.container .title {
+  font-size: 48px;
+}
+
+.container .subtitle {
+  font-size: 20pt;
+}
+
+.container .is-inverted {
+  color: white;
+  padding: 20px;
+}
+
+.hero-body {
+  width: 40%;
+  margin: 100px;
+}
+
+.text-dark {
+  color: black;
+  background: white;
+  border: none;
+}
+
+.button-white {
+  color: #00d1b2;
+  padding: 20px;;
+  background: white;
+  border: none;
+}
+
+.nav .button-white {
+  padding: 10px;
+}
+
+.nav-item {
+  color:white;
+}
+
+.blurbs {
+  height: 350px;
+}
+
+.blurb {
+  height: 200px;
+  padding: 25px 50px;
+}
+
+.blurb h1 {
+  margin: 50px 0;
+}
+
+.center {
+  text-align: center;
+}
+
+.blurb img {
+  margin: 20px 25px 0;
+}
+
+.medium-shot-bg {
+  background: linear-gradient(
+          rgba(0, 209, 178, .9),
+          rgba(0, 209, 178, .9)
+  ),
+    /* bottom, image */
+  url('../../assets/img/medium-shot-background.jpg') no-repeat center center fixed;
+}
+
+.medium-shot .hero-body {
+  padding: 50px !important;
+  margin: 50px;
+}
+
+.medium-shot .hero-body .subtitle {
+  width: 800px;
+  margin: auto auto 50px;
+}
+
+.hero .title {
+  font-size: 30pt;
+}
+
+.hero .subtitle {
+  font-size: 18pt;
+}
+
+.email-container {
+  margin-bottom: 25px;
+}
+
+.email-section .hero-body {
+  margin: 15px 50px;
+}
+
+.email-section .title, .email-section .subtitle {
+  padding: 25px;
+}
+
+.email-input {
+  border-radius: 5px;
+  border: 1px solid #a7a7a7;
+  width: 500px;
+  height: 45px;
+  margin: 0 15px;
+  font-size: 12pt;
+  padding: 5px;
+}
+
+.button-azure {
+  background: #00d1b2;
+  color: white;
+  border-style: none;
+  padding: 40px 50px;
+  height: 45px;
+}
+
+.footer {
+  background: black;
+  color: white;
+}
 /*# sourceMappingURL=bulma.css.map */

@@ -26,6 +26,6 @@ class Home extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('home');
     }
 }

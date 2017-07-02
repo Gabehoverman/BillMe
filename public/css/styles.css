@@ -12,3 +12,8 @@
 .red {
     color: red;
 }
+
+#login-button {
+    padding: 15px 35px;
+    margin: 15px 35px;
+}

@@ -33,7 +33,8 @@ body {
 }
 .aside .main .item {
   display: block;
-  padding: 10px 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
   color: #6F7B7E;
 }
 .aside .main .item.active {
@@ -184,6 +185,38 @@ a.file:not(.button) {
   color: white;
 }
 
+.settings-col {
+  width: 1080px;
+}
+
+.active-nav {
+  background: #00d1b2;
+  min-width: 175px;
+  position: relative;
+  margin: 0 -40px 0 -50px;
+  padding: 10px 50px;
+}
+
+.main .active-nav a {
+  padding-left: 50px;
+}
+
+.nav-item p {
+  font-weight: bold;
+}
+
+@media (max-width: 1300px) {
+  .settings-col {
+    width: 900px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .settings-col {
+    width: 750px;
+  }
+}
+
 @media (max-width: 950px) {
   .form-column {
     max-width: 600px;
@@ -191,5 +224,9 @@ a.file:not(.button) {
 
   .mobile {
     font-size: 12pt;
+  }
+
+  .settings-col {
+    width: 100%;
   }
 }

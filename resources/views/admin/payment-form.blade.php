@@ -1,4 +1,10 @@
 @extends('layouts.aside')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).on('click', '.delete', function() {
+        $(this.closest('div')).remove();
+    });
+</script>
 
 @section('content')
 
@@ -24,18 +30,6 @@
                     <span class="icon is-small is-right">
                       <i class="fa fa-check"></i>
                     </span>
-                        </p>
-                    </div>
-                    <div class="field column">
-                        <label class="label">Useless</label>
-                        <p class="control has-icons-left has-icons-right">
-                            <input name="due_date" class="input" type="date" placeholder="Text input" value="due_date">
-            <span class="icon is-small is-left">
-              <i class="fa fa-dollar"></i>
-            </span>
-            <span class="icon is-small is-right">
-              <i class="fa fa-check"></i>
-            </span>
                         </p>
                     </div>
                 </div>
@@ -94,16 +88,6 @@
                         <textarea value="notes" name="notes" class="textarea" placeholder="Textarea"></textarea>
                     </p>
                 </div>
-
-                <div class="field">
-                    <p class="control">
-                        <label class="checkbox">
-                            <input type="checkbox">
-                            I agree to the <a href="#">terms and conditions</a>
-                        </label>
-                    </p>
-                </div>
-
                 <div class="field is-grouped">
                     <p class="control">
                         <button class="button is-primary">Submit</button>

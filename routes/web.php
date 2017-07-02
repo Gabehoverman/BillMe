@@ -41,6 +41,8 @@ Route::get('admin/tenants', 'AdminController@tenants')->middleware('auth');
 
 Route::get('admin/settings', 'AdminController@settings')->middleware('auth');
 
+Route::post('admin/settings', 'AdminController@updateSettings')->middleware('auth');
+
 Route::get('admin/logout', 'AdminController@logout');
 
 Route::get('/hello', function() {

@@ -36,6 +36,8 @@ class Tenant extends Model
      */
     protected $hidden = [];
 
+    public $timestamps = false;
+
 
     public function home() {
         return $this->belongsTo('home');

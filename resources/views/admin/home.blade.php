@@ -9,7 +9,7 @@
             <div class="tile">
                 <div class="tile is-parent is-vertical">
                     <article class="tile is-child box">
-                        <h3>Total Monthly Utilities</h3>
+                        <h3>This Months Utilities</h3>
                         <h1><a class="green">${{$monthly_util_sum}}</a></h1>
                     </article>
                     <article class="tile is-child box">
@@ -39,76 +39,37 @@
             </div>
             <div class="tile is-parent">
                 <article class="tile is-child box">
-                    <h2 class="center">Current Month's Utilities</h2>
+                    <h2 class="center">Total Amount Owed</h2>
                     <div class="column">
                         <nav class="level is-mobile">
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Water</p>
-                                    <p class="title mobile">${{$eachUtil['Water']->amount}}</p>
+                                    <p class="title mobile">${{$totalUtil['Water']}}</p>
                                 </div>
                             </div>
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Sewage</p>
-                                    <p class="title mobile">${{$eachUtil['Sewage']->amount}}</p>
+                                    <p class="title mobile">${{$totalUtil['Sewage']}}</p>
                                 </div>
                             </div>
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Electric</p>
-                                    <p class="title mobile">${{$eachUtil['Electric']->amount}}</p>
+                                    <p class="title mobile">${{$totalUtil['Electric']}}</p>
                                 </div>
                             </div>
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Gas</p>
-                                    <p class="title mobile">${{$eachUtil['Gas']->amount}}</p>
+                                    <p class="title mobile">${{$totalUtil['Gas']}}</p>
                                 </div>
                             </div>
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Internet</p>
-                                    <p class="title mobile">${{$eachUtil['Internet']->amount}} </p>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                </article>
-            </div>
-            <div class="tile is-parent">
-                <article class="tile is-child box">
-                    <h2 class="center">Previous Month's Utilities</h2>
-                    <div class="column">
-                        <nav class="level is-mobile">
-                            <div class="level-item has-text-centered">
-                                <div>
-                                    <p class="heading">Water</p>
-                                    <p class="title mobile">${{$prevUtil['Water']->amount}}</p>
-                                </div>
-                            </div>
-                            <div class="level-item has-text-centered">
-                                <div>
-                                    <p class="heading">Sewage</p>
-                                    <p class="title mobile">${{$prevUtil['Sewage']->amount}}</p>
-                                </div>
-                            </div>
-                            <div class="level-item has-text-centered">
-                                <div>
-                                    <p class="heading">Electric</p>
-                                    <p class="title mobile">${{$prevUtil['Electric']->amount}}</p>
-                                </div>
-                            </div>
-                            <div class="level-item has-text-centered">
-                                <div>
-                                    <p class="heading">Gas</p>
-                                    <p class="title mobile">${{$prevUtil['Gas']->amount}}</p>
-                                </div>
-                            </div>
-                            <div class="level-item has-text-centered">
-                                <div>
-                                    <p class="heading">Internet</p>
-                                    <p class="title mobile">${{$prevUtil['Internet']->amount}} </p>
+                                    <p class="title mobile">${{$totalUtil['Internet']}} </p>
                                 </div>
                             </div>
                         </nav>

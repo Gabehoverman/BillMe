@@ -1,4 +1,10 @@
 @extends('layouts.aside')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).on('click', '.delete',function() {
+        $(this.closest('div')).remove();
+    });
+</script>
 
 @section('content')
 

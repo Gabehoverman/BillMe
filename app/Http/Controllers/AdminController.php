@@ -9,6 +9,8 @@ use App\Models\Utility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Home;
+use Illuminate\Support\Facades\Hash;
+use Mockery\CountValidator\Exception;
 
 class AdminController extends Controller
 {
@@ -46,17 +48,50 @@ class AdminController extends Controller
         $eachUtil = array();
         foreach($utilities as $ut) {
             $bill = Bill::all()->where('utility_id','=',$ut->id)->where('month','=',$date['month']);
-            foreach ($bill as $b) {
-                $eachUtil[$ut->name] = $b;
-            }
+            //if ($bill != null) {
+                foreach ($bill as $b) {
+                    $eachUtil[$ut->name] = $b;
+                }
+            //} else {
+
+                $eachUtil[$ut->name] = 0;
+            //}
         }
         $prevUtil = array();
         foreach($utilities as $ut) {
-            $bill = Bill::all()->where('utility_id','=',$ut->id)->where('month','=',$prevMonth);
+            $bill = Bill::all()->where('utility_id','=',$ut->id)->where('month','=',$date['month']);
             foreach ($bill as $b) {
                 $prevUtil[$ut->name] = $b;
             }
         }
+
+        //Utilitiy totals from day 1
+        $totalUtilities = array();
+        foreach($utilities as $ut) {
+            $totalUtilities[$ut->name] = 0;
+            $bill = Bill::all()->where('utility_id','=',$ut->id);
+            foreach ($bill as $b) {
+                $totalUtilities[$ut->name] = $totalUtilities[$ut->name] + $b->amount;
+            }
+        }
+
+        $totalPayments = array();
+        foreach($utilities as $ut) {
+            $totalPayments[$ut->name] = 0;
+            $payment = Payment::all()->where('recipient_id','=',$ut->id);
+            foreach ($payment as $p) {
+                $totalPayments[$ut->name] = $totalPayments[$ut->name] + $p->amount;
+            }
+        }
+
+        //Total utilities minus all payments
+        foreach ($utilities as $ut)
+            try {
+                $totalUtilities[$ut->name] = $totalUtilities[$ut->name] - $totalPayments[$ut->name];
+            } catch (Exception $E) {
+                echo $E;
+            }
+
 
 
 
@@ -86,7 +121,8 @@ class AdminController extends Controller
             'monthly_util_sum' => $monthly_util_sum,
             'eachUtil' => $eachUtil,
             'prevUtil' => $prevUtil,
-            'payments' => $payment_total
+            'payments' => $payment_total,
+            'totalUtil' => $totalUtilities
         );
         return view('admin/home', $data);
     }
@@ -245,12 +281,42 @@ class AdminController extends Controller
         $home = Home::all()->where('id','=',$tenant_info->home_id);
         foreach ($home as $h)
             $home = $h;
-
-
+        $success = false;
+        $data['success'] = $success;
         $data['user'] = $user;
         $data['tenant'] = $tenant_info;
         $data['home'] = $home;
 
+
+        return view('admin/settings',$data);
+    }
+
+    public function updateSettings(Request $req) {
+
+        $user = Auth::user();
+        $tenant = Tenant::all()->where('id','=',$user->tenant_id);
+        foreach ($tenant as $t)
+            $tenant = $t;
+        $home = Home::all()->where('id','=',$tenant->home_id);
+        foreach ($home as $h)
+            $home = $h;
+
+        if ($req->action == 1) {
+            $user->email = $req->email;
+            $user->password = Hash::make($req->password);
+            $user->save();
+            $success = true;
+        } else if ($req->action == 2) {
+            $tenant->move_out_date = $req->move_out_date;
+            $tenant->save();
+            $success = true;
+        } else {
+            $success = false;
+        }
+        $data['success'] = $success;
+        $data['user'] = $user;
+        $data['tenant'] = $tenant;
+        $data['home'] = $home;
 
         return view('admin/settings',$data);
     }
