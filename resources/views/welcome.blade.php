@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="./public/css/styles.css">
         <link rel="stylesheet" href="/public/bulma/css/bulma.css">
+        <link rel="stylesheet" type="text/css" src="{{ URL::asset('bulma/css/bulma.css') }}">
+
 
         <!-- Styles -->
 
