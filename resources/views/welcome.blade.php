@@ -12,7 +12,8 @@
         <link rel="stylesheet" href="../bulma/css/bulma.css">
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../public/app/styles.css">
+        <link rel="stylesheet" href="./public/css/styles.css">
+        <link rel="stylesheet" href="/public/bulma/css/bulma.css">
 
         <!-- Styles -->
 
