@@ -70,10 +70,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - Free Bulma template</title>
+    <title> House Mate - Login </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" id="bulma" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.2/css/bulma.min.css" />
     <link rel="stylesheet" type="text/css" href="../bulma/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/styles.css">
 </head>
 <body>
 <div class="login-wrapper columns">
@@ -94,17 +95,12 @@
     </div>
     <div class="column is-4">
         <section class="hero is-fullheight">
-            <div class="hero-heading">
-                <div class="section has-text-centered">
-                    <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma logo" width="150px">
-                </div>
-            </div>
             <div class="hero-body">
                 <div class="container">
                     <div class="columns">
                         <div class="column is-8 is-offset-2">
-                            <h1 class="avatar has-text-centered section">
-                                <img src="https://placehold.it/128x128">
+                            <h1 class=" has-text-centered section">
+                                <img src="../assets/img/HouseMateLogoDark.png">
                             </h1>
                             <!-- AUTHO Login Form -->
                             <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
@@ -149,7 +145,7 @@
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <p class="control login">
-                                            <button type="submit" class="button is-success is-outlined is-large is-fullwidth no-round">Login</button>
+                                            <button type="submit" class="button is-outlined is-large is-fullwidth no-round button-t">Login</button>
                                         </p>
                                         <a class="btn btn-link" href="{{ route('password.request') }}">
                                             Forgot Your Password?

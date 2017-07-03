@@ -327,6 +327,14 @@ class AdminController extends Controller
         return view('Auth/login');
     }
 
+    public function TestEnvironment() {
+
+        $utility = Utility::where('name','=','water')->first();
+
+        $data['utility'] = $utility;
+
+        return $data;
+    }
 
 
 }

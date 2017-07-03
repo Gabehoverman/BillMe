@@ -51,7 +51,7 @@ html,body {
 }
 
 .hero-banner .hero {
-  background: url('https://unsplash.it/2000/1000');
+  background: linear-gradient(rgba(0, 209, 178,.85),rgba(0, 209, 178,.85)), url('https://unsplash.it/2000/1000');
   background-position: center;
   background-size: cover;
   background-blend-mode: screen;
@@ -61,4 +61,17 @@ html,body {
   display: inline-block;
   background-color: rgba(0,0,0, 0.6);
   padding: 5px;
+}
+
+.button-t {
+  cursor: hand;
+  background: #00d1b2;
+  color: white;
+  border-color: white;
+}
+
+.button-t:hover {
+  color: #00d1b2;
+  background: white;
+  border-color: #00d1b2 !important;
 }
