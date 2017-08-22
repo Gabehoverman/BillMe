@@ -20,17 +20,11 @@ class AdminController extends Controller
 
         //Get user information, tenant id, and home id
         $user = Auth::user();
-        $tenant = Tenant::all()->where('id','=',$user->tenant_id);
-        foreach ($tenant as $t)
-            $home = Home::all()->where('id','=',$t->home_id);
-        foreach ($home as $h)
-            $home = $h;
+        $tenant = Tenant::where('id','=',$user->tenant_id)->first();
+        $home = Home::where('id','=',$tenant->home_id)->first();
 
         //Find all payments Tenant has made and sum
-        $payments = Payment::all()->where('tenant_id', '=', $user->tenant_id);
-        $payment_total = 0;
-        foreach ($payments as $payment)
-            $payment_total = $payment_total + $payment->amount;
+        $payment_total = Payment::getPayments($user);
 
         //Find all bills home has and sum
         $utilities = Utility::all()->where('home_id', '=', $home->id);
@@ -42,8 +36,10 @@ class AdminController extends Controller
             }
         }
 
+        $bill_total = Payment::getHomeUtilities($home);
+
         $date = getdate();
-        $prevMonth = date("F", strtotime($date['month'] . " last month"));
+        //$prevMonth = date("F", strtotime($date['month'] . " last month"));
 
         $eachUtil = array();
         foreach($utilities as $ut) {
@@ -53,7 +49,6 @@ class AdminController extends Controller
                     $eachUtil[$ut->name] = $b;
                 }
             //} else {
-
                 $eachUtil[$ut->name] = 0;
             //}
         }
