@@ -100,7 +100,7 @@
                     <div class="columns">
                         <div class="column is-8 is-offset-2">
                             <h1 class=" has-text-centered section">
-                                <img src="../assets/img/HouseMateLogoDark.png">
+                                <a href="/"><img src="../assets/img/HouseMateLogoDark.png"></a>
                             </h1>
                             <!-- AUTHO Login Form -->
                             <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
