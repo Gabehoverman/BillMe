@@ -1,1 +1,1 @@
-{{$totalPay['Water']}}
+{{0}}

@@ -11,13 +11,15 @@ use App\Models\Utility;
 class restfulapi extends Controller
 {
 
+
+
     /**** Utility Controls ****/
 
     //Get all Utilities
     public function getAllUtilities() {
         $util = Utility::all();
         $data['data'] = $util;
-        return view('APIViews/APIData',$data);
+        return $data;
     }
 
     //Get utility based on ID

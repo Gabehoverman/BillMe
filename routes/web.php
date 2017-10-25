@@ -78,5 +78,9 @@ Route::get('bills/{id}', 'restfulapi@getOneBill');
 
 Route::get('bills/utility/{id}', 'restfulapi@getUtilityBill');
 
+//Sandbox URLS
+
+Route::get('sandbox', 'AdminController@TestEnvironment');
+
 
 

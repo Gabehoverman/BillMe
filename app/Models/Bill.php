@@ -39,8 +39,6 @@ class Bill extends Model
 
     public $timestamps = false;
 
-
-
     public function utility() {
         return $this->belongsTo('utility');
     }
