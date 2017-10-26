@@ -216,7 +216,7 @@
             </div>
 
             <div class="col-sm-4 text-right">
-                <p><small>Copyright &copy; 2016. All rights reserved. <br>
+                <p><small>Copyright &copy; 2017. All rights reserved. <br>
                         Created by <a href="http://GabeHoverman.com">Gabe Hoverman</a></small></p>
             </div>
         </div>
