@@ -11,4 +11,4 @@ Utility and expense tracking software for households with multiple tenants built
 Installation Steps
 -----------------
 
-## 1. Coming soon
+### 1. Coming soon
