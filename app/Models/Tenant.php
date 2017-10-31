@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Mockery\Exception;
 
 class Tenant extends Model
 {
@@ -49,6 +50,24 @@ class Tenant extends Model
 
     public function user() {
         return $this->belongsTo('user');
+    }
+
+    public static function saveTenant($req) {
+    	$tenant = new Tenant();
+		try {
+			$tenant->name          = $req->name;
+			$tenant->role          = 'tenant';
+			$tenant->move_in_date  = $req->move_in_date;
+			$tenant->move_out_date = $req->move_out_date;
+			$tenant->active        = true;
+			$tenant->home_id       = 1;
+
+			$tenant->save();
+
+		} catch(Exception $E) {
+			return $E;
+	    }
+		return true;
     }
 
 }

@@ -267,6 +267,32 @@ class AdminController extends Controller
         return view('admin/tenants',$data);
     }
 
+    public function tenantForm() {
+
+    	$success = false;
+    	$data = [
+    		'success' => $success
+	    ];
+
+
+    	return view('admin/tenant-form',$data);
+	}
+
+	public function addTenant(Request $req) {
+
+    	if (Tenant::saveTenant($req)) {
+    		$success = true;
+	    } else {
+    		$success = false;
+	    }
+
+		$data = [
+			'success' => $success
+		];
+
+		return view('admin/tenant-form',$data);
+	}
+
     public function settings() {
 
         $user = Auth::user();

@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('admin/dashboard', 'AdminController@dashboard')->middleware('auth');
 
-Route::get('tenant', 'Controller@tenants')->middleware('auth');
+Route::get('/tenant', 'Controller@Tenants')->middleware('auth');
 
 Route::get('admin/bills', 'AdminController@bills')->middleware('auth');
 
@@ -38,6 +38,10 @@ Route::get('admin/add-payment', 'AdminController@addPayment')->middleware('auth'
 Route::post('admin/add-payment', 'AdminController@updatePayment')->middleware('auth');
 
 Route::get('admin/tenants', 'AdminController@tenants')->middleware('auth');
+
+Route::get('admin/tenant-form', 'AdminController@tenantForm')->middleware('auth');
+
+Route::post('admin/add_tenant', 'AdminController@addTenant')->middleware('auth');
 
 Route::get('admin/settings', 'AdminController@settings')->middleware('auth');
 

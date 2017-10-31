@@ -33,16 +33,16 @@ class UserLoginSeeder extends Seeder
 {
     public function run() {
         $admin = array([
-           'name' => 'Gabe',
-            'email' => 'Hoverman@Marshall.edu',
+           'name' => 'Admin',
+            'email' => 'Admin@Admin.com',
             "password"=> Hash::make('password'),
             'role' => 'Admin',
             'tenant_id' => 1
         ]);
 
         $tenant = array([
-            'name' => 'Tyrell',
-            'email' => 'TyrellCarlton@Marshall.edu',
+            'name' => 'Tenant',
+            'email' => 'tenant@tenant.com',
             "password"=> Hash::make('password'),
             'role' => 'Tenant',
             'tenant_id' => 2
@@ -60,7 +60,7 @@ class HomeSeederClass extends Seeder
 
         $sig = array([
            'id' => 1,
-            'name' => 'Sig Tau',
+            'name' => 'Home',
         ]);
 
         DB::table('home')->insert($sig);
@@ -75,7 +75,7 @@ class TenantSeederClass extends Seeder
 
         $gabe = array([
             'home_id' => 1,
-            'name' => 'Gabe',
+            'name' => 'admin',
             'role' => 'admin',
             'move_in_date' => '2016-08-01',
             'move_out_date' => '2017-08-01',
@@ -84,7 +84,7 @@ class TenantSeederClass extends Seeder
 
         $ty = array([
             'home_id' => 1,
-            'name' => 'Tyrell',
+            'name' => 'tenant',
             'role' => 'tenant',
             'move_in_date' => '2016-08-01',
             'move_out_date' => '2017-08-01',
