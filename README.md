@@ -22,14 +22,14 @@ that database into the .env file.
 
 It should look something like this:
 
-'''
+```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=YourDatabaseName
 DB_USERNAME=YourUsername
 DB_PASSWORD=YourPassword
-'''
+```
 
 ### 3. Run Migrations and Seed
 
@@ -38,18 +38,18 @@ and seed the database.
 
 To do that, just run these commands:
 
-'''
+```
 php artisan migrate
 php artisan db:seed
-'''
+```
 
 ### 4. Start The Server
 
 For the final step, run one last command to get Laravel's built in server up and running.
 
-'''
+```
 php artisan serve
-'''
+```
 
 Seeded Data and Users
 ---------------------
@@ -58,8 +58,11 @@ The seeded data should start you off with a couple of utilities, some bills, and
 
 The admin login credentials will be:
 
-Email: Admin@Admin.com
-Password: password
+> Email: Admin@Admin.com 
+
+> Password: password
+
+
 
 The tenant login credentials will be:
 
