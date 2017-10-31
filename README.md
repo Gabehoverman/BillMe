@@ -66,5 +66,6 @@ The admin login credentials will be:
 
 The tenant login credentials will be:
 
-Email: Tenant@Tenant.com
-Password: password
+> Email: Tenant@Tenant.com
+
+> Password: password
