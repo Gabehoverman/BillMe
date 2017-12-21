@@ -103,6 +103,7 @@
                                 <a href="/"><img src="../assets/img/HouseMateLogoDark.png"></a>
                             </h1>
                             <!-- AUTHO Login Form -->
+
                             <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                                 {{ csrf_field() }}
 

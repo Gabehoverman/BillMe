@@ -17,3 +17,41 @@
     padding: 15px 35px;
     margin: 15px 35px;
 }
+
+.sidebar {
+    background: #3b4653;
+    color: white;
+    height: 100vh;
+    padding: 0 !important;
+}
+
+.side-nav ul li a {
+    min-width: 100% !important;
+}
+
+.side-nav-item {
+    padding:15px;
+    width: 100%;
+}
+
+.side-nav-item {
+    color: white;
+}
+
+.side-nav-item:hover {
+    color: #19ccb3;
+    text-decoration: none;
+}
+
+.side-nav-item:hover {
+    background: #323c48;
+}
+
+.logo {
+    background: #19ccb3;
+    padding: 15px;
+}
+
+.no-padding {
+    margin: 0;
+}

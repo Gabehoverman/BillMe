@@ -67,4 +67,13 @@ class Payment extends Model
         }
         return $bill_total;
     }
+
+    public static function getAllPayments() {
+    	$payments = Payment::all();
+    	$paymentSum = 0;
+    	foreach ($payments as $payment) {
+    		$paymentSum = $paymentSum + $payment->amount;
+	    }
+	    return($paymentSum);
+    }
 }

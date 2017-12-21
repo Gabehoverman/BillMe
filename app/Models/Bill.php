@@ -42,4 +42,13 @@ class Bill extends Model
     public function utility() {
         return $this->belongsTo('utility');
     }
+
+    public static function getBillSum() {
+    	$bills = Bill::all();
+    	$billsum = 0;
+    	foreach( $bills as $bill) {
+    		$billsum = $billsum + $bill->amount;
+	    }
+	    return $billsum;
+    }
 }

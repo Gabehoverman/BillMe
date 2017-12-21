@@ -70,4 +70,8 @@ class Tenant extends Model
 		return true;
     }
 
+    public static function getTenantInfo() {
+
+    }
+
 }

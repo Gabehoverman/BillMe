@@ -7,7 +7,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>BillMe - Multi-Tenant Utility Management Software</title>
+    <title>House Mate - Multi-Tenant House Management Software</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
@@ -18,10 +18,11 @@
     <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">
 
     <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/node_modules/bulma/css/bulma.css">
     <link href="../assets/css/style.css" rel="stylesheet">
     <link href="../assets/css/style-responsive.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="/node_modules/bulma/css/bulma.css">
+
 
     
 
@@ -98,7 +99,7 @@
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-    @yield('content')
+            @yield('content')
         </section>
     </section>
 

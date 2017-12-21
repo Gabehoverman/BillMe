@@ -86,5 +86,16 @@ Route::get('bills/utility/{id}', 'restfulapi@getUtilityBill');
 
 Route::get('sandbox', 'AdminController@TestEnvironment');
 
+Route::get('MaterialDash', function() {
+		return(view('MaterialDash'));
+	});
+
+
+//App URLs
+Route::get('app/user', 'AppController@user')->middleware('auth');
+Route::get('app/bills', 'AppController@bills')->middleware('auth');
+Route::get('app/maintenance', 'AppController@maintenance')->middleware('auth');
+Route::get('app/{id}', 'AppController@dashboard')->middleware('auth');
+Route::get('app/logout', 'AppController@logout')->middleware('auth');
 
 
