@@ -92,6 +92,9 @@ Route::get('MaterialDash', function() {
 
 
 //App URLs
+Route::get('landing', function() {
+    return(view('landing'));
+});
 Route::get('app/user', 'AppController@user')->middleware('auth');
 Route::get('app/bills', 'AppController@bills')->middleware('auth');
 Route::get('app/maintenance', 'AppController@maintenance')->middleware('auth');

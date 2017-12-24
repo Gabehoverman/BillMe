@@ -1,0 +1,190 @@
+body {
+    font-family: "Myriad Pro";
+}
+
+.header {
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(to left, rgba(0,209,178,.95) 0%,rgba(187,240,233,0.95) 100%), url('/assets/img/victorian.png'); 
+}
+
+.navbar {
+    background: rgba(0,0,0,0);
+}
+
+.dark li {
+    color: #37374a !important;
+}
+
+.logo {
+    padding: 15px 50px;
+    display: inline;
+}
+
+.links {
+    float: right;
+}
+
+.links li {
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 30px;
+    padding-right: 50px;
+    color: white;
+    font-size:13pt;
+}
+
+.hero-centered {
+    padding-top: 10%;
+    margin: auto;
+    text-align: center;
+    color: white;
+}
+
+.hero-centered .title {
+    font-size: 50pt;
+    line-height: 85px;
+}
+
+.hero-centered hr {
+    display: inline-block;
+    width: 25px;
+    border-bottom: 3px solid white;
+}
+
+.hero-centered .subheading {
+    font-size: 12pt;
+    display: inline-block;
+}
+
+.hero-centered ul li {
+    display: inline;
+}
+
+.hero-img {
+    padding-right: 25px;
+    padding-left: 25px;
+    height: 2px;
+}
+
+.hero-left .hero-img {
+    padding-left: 0px;
+}
+
+.hero-centered .subtitle {
+    font-size:13pt;
+    line-height: 45px;
+}
+
+.hero-centered .hr-left {
+    width: 20px;
+    color: white;
+    float:left;
+}
+
+.hero-centered .hr-right {
+    width:15px;
+    color: white;
+}
+
+.btn-primary {
+    color: #c2c9db;
+    font-size: 12pt;
+    border-radius: 25px;
+    padding:  10px 18px;
+    margin: 10px;
+    background:white;
+    border: none;
+    box-shadow: 1px 1px 10px lightgray;
+}
+
+.hero-left .btn-primary {
+    margin: 15px 0px;
+}
+
+.browser {
+    text-align: center;
+    margin-top: 8%;
+}
+
+.browser img {
+    width: 1000px;
+    margin: auto;
+}
+
+.features {
+    margin-top: 20%;
+    margin-bottom: 10%;
+}
+
+.hero-dark {
+    padding-top: 10%;
+    color: #37374a;
+}
+
+.blurbs {
+    margin-top: 375px;
+}
+
+.blurb {
+    margin: 25px auto;
+    align-content: center;
+    text-align: center;
+    padding: 0px 25px;
+}
+
+.blurb h3 {
+    color: #37374a;
+}
+
+.blurb p {
+    color: #a8abb4;
+    font-size: 12pt;
+}
+
+.blurb-icon{
+    color: gray;
+}
+
+.mobile {
+    padding: 75px;
+    background: #f0f3f6;
+}
+
+.hero-left {
+    text-align: left !important;
+    padding-top: 200px;
+}
+
+.CTA {
+    padding-bottom: 7.5%;
+    background: #00d1b2;
+}
+
+.hero-no-padding {
+    padding-top: 10% !important;
+}
+
+.footer {
+    background: white;
+    height: 10vh;
+    color: #c2c9db;
+}
+
+.footer-hr {
+    width: 95%;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.social-links {
+    float: right;
+    padding-top: -15px;
+}
+
+.social-links li {
+    text-decoration: none;
+    display: inline-block;
+    padding-right: 50px;
+    font-size: 16pt;
+}
