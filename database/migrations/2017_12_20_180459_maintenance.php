@@ -28,6 +28,6 @@ class Maintenance extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('maintenance');
+        //
     }
 }

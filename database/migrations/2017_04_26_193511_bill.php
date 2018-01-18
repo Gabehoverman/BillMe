@@ -33,6 +33,6 @@ class Bill extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bill');
+        //
     }
 }

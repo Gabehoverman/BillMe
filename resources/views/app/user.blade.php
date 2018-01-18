@@ -14,7 +14,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Home</label>
-                                    <input type="text" class="form-control" disabled placeholder="Company">
+                                    <input type="text" class="form-control" disabled placeholder="Company" value="{{$home->name}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -29,7 +29,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Full Name</label>
-                                    <input type="text" class="form-control" placeholder="Company" value={{ $tenant }} >
+                                    <input type="text" class="form-control" placeholder="Company" value="{{$tenant->name}}">
                                 </div>
                             </div>
                         </div>

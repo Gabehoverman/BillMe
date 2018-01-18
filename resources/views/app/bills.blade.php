@@ -134,7 +134,7 @@
                                     <td>{{$payment->id}}</td>
                                     <td>{{$payment->tenant}}</td>
                                     <td>{{$payment->amount}}</td>
-                                    <!--<td>{{$payment->utility}}</td>
+                                    <td>{{$payment->utility}}</td>
                                     @if($bill->active == 1)
                                         <td><i class="fa fa-check"></i></td>
                                     @else
