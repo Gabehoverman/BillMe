@@ -3,6 +3,14 @@
 @section('content')
         <div class="container-fluid">
             <div class="row">
+                <div class="col-md-12">
+                        @if($success == true)  
+                        <div class="alert alert-success alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Success!</strong> A new {{$submission}} has been added.
+                              </div>
+                        @endif
+                </div>
                 <div class="col-md-3">
                     <div class="card">
                         <div class="header">
@@ -50,7 +58,8 @@
                     <div class="card">
                         <div class="header">
                             <h4 class="title">Bills</h4>
-                            <button style="float: right; margin-top: -25px;"class="btn">Add Bill</button>
+                            
+                            @include('Viewpartials/button')
 
                             <p class="category">Here is where all your bills will show.</p>
                         </div>
@@ -65,7 +74,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($bills as $bill)
-                                <tr>
+                                <tr id="{{$bill->id}}">
                                     <td>{{$bill->id}}</td>
                                     <td>{{$bill->amount}}</td>
                                     <td>{{$bill->month}}</td>
@@ -73,12 +82,32 @@
                                     @if($bill->active == 1)
                                     <td><i class="fa fa-check"></i></td>
                                     @else
-                                    <td><i class="fa fa-times"></i></td>
+                                   <td><button onclick="myAlert({{$bill->id}})"><i class="fa fa-times"></i></button></td>
                                     @endif
                                 </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+
+                            <script>
+                                function myAlert(id) {
+                                    alert(id);
+                                    var row = document.getElementById(id);
+                                    console.log("{{csrf_token()}}")
+                                    fetch('http://127.0.0.1:8000/app/maintenance/delete', {
+                                        method: 'post',
+                                        headers: {
+                                            'X-XSRF-TOKEN': " {{csrf_token()}} "
+                                        } 
+                                    })
+                                    .then((res) => res.json())
+                                    .then((data) => {
+                                        console.log(data);
+                                    })
+                            
+                                    row.remove();
+                                }
+                            </script>
 
                         </div>
                     </div>
@@ -87,7 +116,7 @@
                     <div class="card">
                         <div class="header">
                             <h4 class="title">Payments</h4>
-                            <button style="float: right; margin-top: -25px;"class="btn btn">Add Payment</button>
+                            @include('viewpartials/payment-button')
                             <p class="category">Here is where all your payments will show.</p>
                         </div>
                         <div class="content table-responsive table-full-width">

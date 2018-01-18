@@ -3,6 +3,14 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
+            <div class="col-md-12">
+                @if($success == true)  
+                <div class="alert alert-success alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Success!</strong> A new maintenance request has been added.
+                      </div>
+                @endif
+            </div>
             <div class="col-md-4">
                 <div class="card">
                     <div class="header">
@@ -39,7 +47,7 @@
                 <div class="card">
                     <div class="header">
                         <h4 class="title">Maintenance</h4>
-                        <button style="float: right; margin-top: -25px;"class="btn">Submit Request</button>
+                        @include('viewpartials/maintenance-button')
 
                         <p class="category">Here is where the maintenance requests are stored.</p>
                     </div>

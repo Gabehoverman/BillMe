@@ -51,7 +51,7 @@
 
         <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" style="font-size: 20pt; color: white; padding: 15px; font-weight: bold">
+                <a href="/" style="font-size: 20pt; color: white; padding: 15px; font-weight: bold">
                     House Mate
                 </a>
             </div>
@@ -60,12 +60,6 @@
                     <a href="/app/dashboard">
                         <i class="fa fa-trello"></i>
                         <p>Dashboard</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons.html">
-                        <i class="fa fa-home"></i>
-                        <p>House Overview</p>
                     </a>
                 </li>
                 <li>
@@ -111,7 +105,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
                         <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="dashboard" class="" >
                                 <i class="fa fa-dashboard"></i>
                                 <p class="hidden-lg hidden-md">Dashboard</p>
                             </a>
@@ -152,10 +146,9 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="/app/user">User Account</a></li>
-                                <li><a href="app/home">Home Overview</a></li>
                                 <li><a href="#">Settings</a></li>
                                 <li class="divider"></li>
-                                <li><a href="/app/logout">Logout</a></li>
+                                <li><a href="logout">Logout</a></li>
                             </ul>
                         </li>
                         <li class="separator hidden-lg hidden-md"></li>
@@ -175,23 +168,23 @@
                 <nav class="pull-left">
                     <ul>
                         <li>
-                            <a href="#">
-                                Home
+                            <a href="dashboard">
+                                Dashboard
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                Company
+                            <a href="bills">
+                                Bills
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                Portfolio
+                            <a href="maintenance">
+                                Maintenance
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                Blog
+                            <a href="user">
+                                Profile
                             </a>
                         </li>
                     </ul>
@@ -209,6 +202,8 @@
 </body>
 
 <!--   Core JS Files   -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        
 <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
 

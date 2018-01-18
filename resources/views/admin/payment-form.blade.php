@@ -62,22 +62,22 @@
                     <div class="field column is-one-quarter">
                         <label class="label">Month</label>
                         <p class="control">
-        <span class="select">
-          <select name="month">
-              <option name="month" value="January">January</option>
-              <option name="month" value="February">February</option>
-              <option name="month" value="March">March</option>
-              <option name="month" value="April">April</option>
-              <option name="month" value="May">May</option>
-              <option name="month" value="June">June</option>
-              <option name="month" value="July">July</option>
-              <option name="month" value="August">August</option>
-              <option name="month" value="September">September</option>
-              <option name="month" value="October">October</option>
-              <option name="month" value="November">November</option>
-              <option name="month" value="December">December</option>
-          </select>
-        </span>
+                        <span class="select">
+                        <select name="month">
+                            <option name="month" value="January">January</option>
+                            <option name="month" value="February">February</option>
+                            <option name="month" value="March">March</option>
+                            <option name="month" value="April">April</option>
+                            <option name="month" value="May">May</option>
+                            <option name="month" value="June">June</option>
+                            <option name="month" value="July">July</option>
+                            <option name="month" value="August">August</option>
+                            <option name="month" value="September">September</option>
+                            <option name="month" value="October">October</option>
+                            <option name="month" value="November">November</option>
+                            <option name="month" value="December">December</option>
+                        </select>
+                        </span>
                         </p>
                     </div>
                 </div>

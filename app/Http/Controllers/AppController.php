@@ -29,7 +29,44 @@ class AppController extends Controller
 		return view('app/dashboard',$data);
 	}
 
-	public function bills() {
+	public function bills(Request $req) {
+
+		$data['success'] = false;
+		$data['submission'] = "hello";
+		if ($req->type == 'bill' ) {
+			$bill = new Bill;
+
+			$bill->amount = $req->get('amount', '');
+			$bill->bill_date = new \DateTime($req->get("bill_date"));
+			$bill->due_date = new \DateTime($req->get('due_date'));
+			$bill->utility_id = $req->get('recipient','');
+			$bill->image_url = "hello world";
+			$bill->month = $req->get('month');
+			$bill->active = false;
+			$bill->notes = $req->get('notes');
+
+			$bill->save();
+			$data['submission'] = 'bill';
+			$data['success'] = true;
+		} 
+		 if ($req->type == 'payment') {
+			$payment = new Payment;
+
+			$payment->tenant_id = Auth::user()->id;
+			$payment->amount = $req->get('amount');
+			$payment->recipient_id = $req->get('recipient');
+			$payment->payment_date = new \DateTime($req->get("due_date"));
+			$payment->image_url = 'null';
+			$payment->approved = false;
+			$payment->notes = $req->get('notes');
+
+			$payment->save();
+
+			$data['submission'] = 'payment';
+			$data['success'] = true;
+		}
+		
+
 		$bills = Bill::all();
 		$utilities = Utility::all();
 		foreach($bills as $bill) {
@@ -63,13 +100,33 @@ class AppController extends Controller
 		return(view('App/bills',$data));
 	}
 
-	public function maintenance() {
+	public function maintenance(Request $req) {
+
+		$data['success'] = false;
+		if ($req->type == 'maintenance') {
+			$maintenance = new maintenance;
+
+			$user_id = Auth::user()->id;
+			$username = Tenant::where('id','=',$user_id)->first();
+			$maintenance->tenant = $username->name;
+			$maintenance->notes = $req->get('notes');
+			$maintenance->active = true;
+
+			$maintenance->save();
+			$data['success'] = true;
+		}
+
 		$data['maintenance'] = Maintenance::all();
 		$data['all'] = $data['maintenance']->count();
 		$data['completed'] = Maintenance::getAllCompleted();
 		$data['outstanding'] = $data['all'] - $data['completed'];
 
 		return view('app/maintenance',$data);
+	}
+
+	public function deleteMaintenance(Request $req) {
+		$data['request'] = true;
+		return $data;
 	}
 
 	public function user() {
@@ -86,8 +143,8 @@ class AppController extends Controller
 	}
 
 	public function logout() {
-		Auth::user()->$this->logout();
-		return redirect()->route('login');
+		Auth::logout();
+		return redirect('login');
 	}
 
 }

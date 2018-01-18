@@ -15,6 +15,12 @@ use Mockery\CountValidator\Exception;
 class AdminController extends Controller
 {
 
+
+    /**
+   * LEGACY CODE | NO LONGER IN USE
+   * DASHBOARD FUNCTIONALITY MOVED TO APPCONTROLLER
+   */
+
     public function dashboard()
     {
 

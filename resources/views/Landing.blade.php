@@ -38,7 +38,7 @@
                     <ul class="links">
                         <li>About</li>
                         <li>Contact</li>
-                        <li>Sign In</li>
+                        <li><a style="color:white" href="/login">Sign In</a></li>
                     </ul>
                 </div>
                     <div class="container">
@@ -107,7 +107,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            <img src="assets/img/phone.png">
+                            <img class="ios-mockup" src="assets/img/phone.png">
                         </div>
                         <div class="col-md-6 hero-centered hero-dark hero-left">
                             <img class="hero-img" src="assets/img/darkhr.png">

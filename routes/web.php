@@ -11,8 +11,10 @@
 |
 */
 
+use App\Models\Maintenance;
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('Landing');
 });
 
 Route::get('/tenants', 'Controller@Tenants');
@@ -98,7 +100,19 @@ Route::get('landing', function() {
 Route::get('app/user', 'AppController@user')->middleware('auth');
 Route::get('app/bills', 'AppController@bills')->middleware('auth');
 Route::get('app/maintenance', 'AppController@maintenance')->middleware('auth');
-Route::get('app/{id}', 'AppController@dashboard')->middleware('auth');
 Route::get('app/logout', 'AppController@logout')->middleware('auth');
+Route::get('app/', 'AppController@dashboard')->middleware('auth');
 
+Route::post('/app/bills', 'AppController@bills')->middleware('auth');
+Route::post('app/maintenance','AppController@maintenance')->middleware('auth');
+Route::post('app/maintenance/delete','AppController@deleteMaintenance')->middleware('auth');
 
+Route::get('Vue', function() {
+    $data['maintenance'] = Maintenance::all();
+    return(view('Vue',$data));
+});
+
+Route::get('Maintenance', function() {
+    $data['maintenance'] = Maintenance::all();
+    return($data);
+});
