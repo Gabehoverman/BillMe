@@ -132,9 +132,11 @@ class AppController extends Controller
 	public function user() {
 		$user = Auth::user();
 		$data['user'] = $user;
-		$data['tenant'] = Tenant::where('id','=',$user->tenant_id)->first();
-		$data['home'] = Home::where('id','=',$data['tenant']->home_id)->first();
+		$tenant = Tenant::where('id','=',$user->tenant_id)->first();
+		$data['tenant'] = $tenant;
 
+		
+		return ("Under construction");
 		return view('app/user',$data);
 	}
 

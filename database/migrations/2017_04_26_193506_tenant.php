@@ -31,6 +31,6 @@ class Tenant extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('tenant');
     }
 }

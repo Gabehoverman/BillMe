@@ -101,7 +101,7 @@ Route::get('app/user', 'AppController@user')->middleware('auth');
 Route::get('app/bills', 'AppController@bills')->middleware('auth');
 Route::get('app/maintenance', 'AppController@maintenance')->middleware('auth');
 Route::get('app/logout', 'AppController@logout')->middleware('auth');
-Route::get('app/', 'AppController@dashboard')->middleware('auth');
+Route::get('app/dashboard', 'AppController@dashboard')->middleware('auth');
 
 Route::post('/app/bills', 'AppController@bills')->middleware('auth');
 Route::post('app/maintenance','AppController@maintenance')->middleware('auth');
