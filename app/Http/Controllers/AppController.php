@@ -97,7 +97,7 @@ class AppController extends Controller
 
 		$data['utilities'] = $utilities;
 
-		return(view('App/bills',$data));
+		return(view('app/bills',$data));
 	}
 
 	public function maintenance(Request $req) {
