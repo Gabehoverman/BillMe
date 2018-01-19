@@ -47,6 +47,7 @@
                 <div class="card">
                     <div class="header">
                         <h4 class="title">Maintenance</h4>
+                        
                         @include('ViewPartials/maintenance-button')
 
                         <p class="category">Here is where the maintenance requests are stored.</p>

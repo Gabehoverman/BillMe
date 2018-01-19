@@ -96,7 +96,6 @@ class AppController extends Controller
 		$data['myPayments'] = Payment::getAllPayments($user);
 
 		$data['utilities'] = $utilities;
-
 		return(view('app/bills',$data));
 	}
 
