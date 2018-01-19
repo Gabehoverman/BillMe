@@ -59,7 +59,7 @@
                         <div class="header">
                             <h4 class="title">Bills</h4>
                             
-                            @include('Viewpartials/button')
+                            @include('ViewPartials/button')
 
                             <p class="category">Here is where all your bills will show.</p>
                         </div>
@@ -116,7 +116,7 @@
                     <div class="card">
                         <div class="header">
                             <h4 class="title">Payments</h4>
-                            @include('viewpartials/payment-button')
+                            @include('ViewPartials/payment-button')
                             <p class="category">Here is where all your payments will show.</p>
                         </div>
                         <div class="content table-responsive table-full-width">
