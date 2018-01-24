@@ -52,7 +52,7 @@ class AppController extends Controller
 		 if ($req->type == 'payment') {
 			$payment = new Payment;
 
-			$payment->tenant_id = Auth::user()->id;
+			$payment->tenant_id = Auth::user()->tenant_id;
 			$payment->amount = $req->get('amount');
 			$payment->recipient_id = $req->get('recipient');
 			$payment->payment_date = new \DateTime($req->get("due_date"));
@@ -80,7 +80,7 @@ class AppController extends Controller
 		$payments = Payment::all();
 		foreach($payments as $payment) {
 			$tenant = Tenant::where('id','=',$payment->tenant_id)->first();
-			$payment['tenant'] = $tenant->name;
+			$payment['tenant'] =   "Work in progress";//$tenant->name;
 			foreach($utilities as $util) {
 				if ($payment->recipient_id == $util->id) {
 					$payment['utility'] = $util->name;
@@ -144,6 +144,14 @@ class AppController extends Controller
 	public function logout() {
 		Auth::logout();
 		return redirect('login');
+	}
+
+	public function test() {
+
+		$bill = Bill::all();
+		$bill->utility();
+
+		return ($bill);
 	}
 
 }

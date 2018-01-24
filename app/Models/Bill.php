@@ -39,7 +39,9 @@ class Bill extends Model
 
     public $timestamps = false;
 
-   
+   public function utility() {
+       return $this->belongsTo('app\Models\Utility');
+   }
 
     public static function getBillSum() {
     	$bills = Bill::all();

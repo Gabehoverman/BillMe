@@ -19,7 +19,7 @@ class Utility extends Model
      * @var array
      */
     protected $fillable = [
-        'id','type','name','home_id'
+        'id','type','name','home_id','bill_id'
     ];
 
     /**
@@ -49,6 +49,6 @@ class Utility extends Model
     }
 
     public function bill() {
-        return $this->hasMany('bill');
+        //return $this->hasMany('app\Models\bill');
     }
 }
