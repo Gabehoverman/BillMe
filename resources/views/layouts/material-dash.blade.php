@@ -33,14 +33,13 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.typekit.net/yck2vvw.css">
 
 
 </head>
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="black" data-image="assets/img/sidebar-5.jpg">
+    <div class="sidebar" data-color="black">
 
         <!--
 
@@ -50,13 +49,13 @@
         -->
 
         <div class="sidebar-wrapper">
-            <div class="logo">
+            <div style="padding: 10px;" class="">
                 <a href="/" style="font-size: 20pt; color: white; padding: 15px; font-weight: bold">
-                    House Mate
+                    <img width="200px" src="../assets/img/housematelogosaas.png">
                 </a>
             </div>
             <ul class="nav">
-                <li class="active">
+                <li class="">
                     <a href="/app/dashboard">
                         <i class="fa fa-trello"></i>
                         <p>Dashboard</p>
@@ -82,7 +81,7 @@
                 </li>
                 <li class="active-pro">
                     <a href="upgrade.html">
-                        <i class="pe-7s-rocket"></i>
+                        <i class="fa fa-rocket"></i>
                         <p>Upgrade to PRO</p>
                     </a>
                 </li>
@@ -200,8 +199,22 @@
 
 
 </body>
+<script>
+    $(function(){
+        var current = location.pathname;
+        $('.nav li a').each(function(){
+            var $this = $(this);
+            var $that = $('.wrapper .nav li');
+            // if the current path is like this link, make it active
+            if($this.attr('href').indexOf(current) !== -1){
+                $this.addClass('active-nav');
+            }
+        })
+    })
+</script>
 
 <!--   Core JS Files   -->
+
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         
 <script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
@@ -212,6 +225,7 @@
 
 <!--  Charts Plugin -->
 <script src="../assets/js/chartist.min.js"></script>
+
 
 <!--  Notifications Plugin    -->
 <!--<script src="assets/js/bootstrap-notify.js"></script>-->
@@ -224,22 +238,5 @@
 
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="../../assets/js/demo.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-
-        demo.initChartist();
-
-        $.notify({
-            icon: 'pe-7s-gift',
-            message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
-
-        },{
-            type: 'info',
-            timer: 4000
-        });
-
-    });
-</script>
 
 </html>

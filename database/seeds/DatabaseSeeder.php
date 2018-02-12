@@ -20,14 +20,55 @@ class DatabaseSeeder extends Seeder
         DB::table('bill')->delete();
 
         // $this->call(UsersTableSeeder::class);
-        $this->call('UserLoginSeeder');
-        $this->call('HomeSeederClass');
-        $this->call('TenantSeederClass');
-        $this->call('PaymentSeederClass');
-        $this->call('UtilitySeederClass');
-        $this->call('BillSeederClass');
+        $this->call('FullTableSeeder');
+        //$this->call('UserLoginSeeder');
+        //$this->call('HomeSeederClass');
+        //$this->call('TenantSeederClass');
+        //$this->call('PaymentSeederClass');
+        //$this->call('UtilitySeederClass');
+        //$this->call('BillSeederClass');
     }
 }
+
+class FullTableSeeder extends Seeder {
+    public function run() {
+        
+        $home = array([
+             'name' => 'Home',
+             'id' => 1
+         ]);
+
+         DB::table('home')->insert($home);
+         $this->command->info('seeded');
+
+         $user_admin = array([
+             'id' => 1,
+             'name' => 'Admin',
+             'email' => 'Admin@Admin.com',
+             'password' => Hash::make('password'),
+             'role' => 'Admin',
+             'tenant_id' => 1
+         ]);
+
+         DB::table('users')->insert($user_admin);
+
+         $tenant_admin = array([
+            'id' => 1,
+            'home_id' => 1,
+            'name' => 'admin',
+            'role' => 'admin',
+            'move_in_date' => '2016-08-01',
+            'move_out_date' => '2017-08-01',
+            'active' => true,
+        ]);
+
+        DB::table('tenant')->insert($tenant_admin);
+
+        $this->call('UtilitySeederClass');
+    }
+    //DB::table(tableName)->insert($value);
+}
+
 
 class UserLoginSeeder extends Seeder
 {
@@ -133,30 +174,35 @@ class UtilitySeederClass extends Seeder
     public function run() {
 
         $water = array([
+            'id' => 1,
             'name' => 'Water',
             'type' => 'necessary',
             'home_id' => 1
         ]);
 
         $sewage = array([
+            'id' => 2,
             'name' => 'Sewage',
             'type' => 'necessary',
             'home_id' => 1
         ]);
 
         $electric = array([
+            'id' => 3,
             'name' => 'Electric',
             'type' => 'necessary',
             'home_id' => 1
         ]);
 
         $gas = array([
+            'id' => 4,
             'name' => 'Gas',
             'type' => 'necessary',
             'home_id' => 1
         ]);
 
         $internet = array([
+            'id' => 5,
             'name' => 'Internet',
             'type' => 'necessary',
             'home_id' => 1

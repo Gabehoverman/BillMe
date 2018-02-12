@@ -106,7 +106,14 @@ Route::get('app/test', 'AppController@test')->middleware('auth');
 
 Route::post('/app/bills', 'AppController@bills')->middleware('auth');
 Route::post('app/maintenance','AppController@maintenance')->middleware('auth');
-Route::post('app/maintenance/delete','AppController@deleteMaintenance')->middleware('auth');
+Route::post('app/maintenance/delete','AppController@deleteMaintenance');
+Route::post('app/bills/delete', 'AppController@deleteBill')->middleware('auth');
+Route::post('app/data/delete','AppController@delete')->middleware('auth');
+
+Route::post('/post/test', function () {
+    $data = "success";
+    return json_encode($data);
+});
 
 Route::get('Vue', function() {
     $data['maintenance'] = Maintenance::all();

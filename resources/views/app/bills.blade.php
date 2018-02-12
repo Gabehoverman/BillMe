@@ -1,6 +1,8 @@
 @extends('layouts/material-dash')
 
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -71,6 +73,7 @@
                                 <th>Month</th>
                                 <th>Utility</th>
                                 <th>Paid</th>
+                                <th>Info</th>
                                 </thead>
                                 <tbody>
                                 @foreach($bills as $bill)
@@ -79,36 +82,31 @@
                                     <td>{{$bill->amount}}</td>
                                     <td>{{$bill->month}}</td>
                                     <td>{{$bill->utility}}</td>
+                                    
                                     @if($bill->active == 1)
                                     <td><i class="fa fa-check"></i></td>
                                     @else
-                                   <td><button onclick="myAlert({{$bill->id}})"><i class="fa fa-times"></i></button></td>
+                                  <td><i class="fa fa-times"></i></td>
                                     @endif
+                                    <td>
+                                        <!-- Default dropup button -->
+                                        <div class="btn-group dropup">
+                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             <i class="fa fa-info"></i>
+                                            </button>
+                                            <div class="dropdown-menu" style="min-width:100px; padding: 7px;">
+                                                <!-- Dropdown menu links -->
+                                                <button style="width: 80px;"  class="btn btn-danger" onclick="removeItem({{ $bill->id}}, 'bill')">Delete</button>
+                                            </div>
+
+                                        </div>
+                                    </td>
+
+                                   <!-- <td><button class="btn" onclick="myAlert({{ $bill->id }})"><i class="fa fa-info"></i></button></td> -->
                                 </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-
-                            <script>
-                                function myAlert(id) {
-                                    alert(id);
-                                    var row = document.getElementById(id);
-                                    console.log("{{csrf_token()}}")
-                                    fetch('http://127.0.0.1:8000/app/maintenance/delete', {
-                                        method: 'post',
-                                        headers: {
-                                            'X-XSRF-TOKEN': " {{csrf_token()}} "
-                                        } 
-                                    })
-                                    .then((res) => res.json())
-                                    .then((data) => {
-                                        console.log(data);
-                                    })
-                            
-                                    row.remove();
-                                }
-                            </script>
-
                         </div>
                     </div>
                 </div>
@@ -127,19 +125,33 @@
                                 <th>Amount</th>
                                 <th>Utility</th>
                                 <th>Approved</th>
+                                <th>Info</th>
                                 </thead>
                                 <tbody>
                                 @foreach($payments as $payment)
-                                <tr>
+                                <tr id="{{ $payment->id }}">
                                     <td>{{$payment->id}}</td>
                                     <td>{{$payment->tenant}}</td>
                                     <td>{{$payment->amount}}</td>
                                     <td>{{$payment->utility}}</td>
-                                    @if($bill->active == 1)
+                                    @if($payment->active == 1)
                                         <td><i class="fa fa-check"></i></td>
                                     @else
                                         <td><i class="fa fa-times"></i></td>
                                     @endif
+                                    <td>
+                                            <!-- Default dropup button -->
+                                            <div class="btn-group dropup">
+                                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                 <i class="fa fa-info"></i>
+                                                </button>
+                                                <div class="dropdown-menu" style="min-width:100px; padding: 7px;">
+                                                    <!-- Dropdown menu links -->
+                                                    <button style="width: 80px;"  class="btn btn-danger" onclick="removeItem({{ $payment->id}}, 'payment')">Delete</button>
+                                                </div>
+    
+                                            </div>
+                                        </td>
                                 </tr>
                                 @endforeach
                                 </tbody>
@@ -149,4 +161,8 @@
                 </div>
             </div>
         </div>
+        @include('ViewPartials/JsFunctions')
+
+
+
 @endsection

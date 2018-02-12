@@ -66,21 +66,24 @@ class AppController extends Controller
 			$data['success'] = true;
 		}
 		
-
-		$bills = Bill::all();
-		$utilities = Utility::all();
-		foreach($bills as $bill) {
-			foreach($utilities as $util)
-				if ($bill->utility_id == $util->id) {
-					$bill['utility'] = $util->name;
-				}
+		try {
+			$bills = Bill::all();
+			$utilities = Utility::all();
+			foreach($bills as $bill) {
+				foreach($utilities as $util)
+					if ($bill->utility_id == $util->id) {
+						$bill['utility'] = $util->name;
+					}
+			}
+			$data['bills'] = $bills;
+		} catch (Exception $e) {
+			
 		}
-		$data['bills'] = $bills;
 
 		$payments = Payment::all();
 		foreach($payments as $payment) {
 			$tenant = Tenant::where('id','=',$payment->tenant_id)->first();
-			$payment['tenant'] =   "Work in progress";//$tenant->name;
+			$payment['tenant'] =  $tenant->name;
 			foreach($utilities as $util) {
 				if ($payment->recipient_id == $util->id) {
 					$payment['utility'] = $util->name;
@@ -123,9 +126,54 @@ class AppController extends Controller
 		return view('app/maintenance',$data);
 	}
 
-	public function deleteMaintenance(Request $req) {
-		$data['request'] = true;
-		return $data;
+
+	//Universal Delete Function
+	public function delete(Request $req) {
+		$type = $req->input();
+		return $type;
+
+		//Check delete request type.
+		if ($type['type']== 'bill') {
+
+			try {
+				$bill = Bill::find($req->id);
+				//$bill->delete();
+				$response['code'] = 200;
+			} catch (Exception $e) {
+				$respose['code'] = 500;
+				$response['error'] = $e;
+			}
+			return $response;
+
+		} else if ($type['type'] == 'payment' ) {
+			
+			try {
+				$payment = Payment::find($req->id);
+				//$payment->delete();
+				$response['code'] = 200;
+			} catch (Exception $e) {
+				$respose['code'] = 500;
+				$response['error'] = $e;
+			}
+			return $response;
+
+		} else if ($type['type'] == 'maintenance')  {
+
+			try {
+				$maintenance = Maintenance::find($req->id);
+				//$maintenance->delete();
+				$response['code'] = 200;
+			} catch (Exception $e) {
+				$respose['code'] = 500;
+				$response['error'] = $e;
+			}
+			return $response;
+
+		} else {
+			$response['code'] = 500;
+			$response['error'] = "Unpermitted type";
+		}
+		
 	}
 
 	public function user() {

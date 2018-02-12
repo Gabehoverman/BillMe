@@ -59,10 +59,11 @@
                             <th>Tenant</th>
                             <th>Notes</th>
                             <th>Completed</th>
+                            <th>Info</th>
                             </thead>
                             <tbody>
                             @foreach($maintenance as $m)
-                                <tr>
+                                <tr id="{{ $m->id }}">
                                     <td>{{$m->id}}</td>
                                     <td>{{$m->tenant}}</td>
                                     <td>{{$m->notes}}</td>
@@ -71,9 +72,22 @@
                                     @else
                                         <td><i class="fa fa-check"></i></td>
                                     @endif
+                                    <td>
+                                            <!-- Default dropup button -->
+                                            <div class="btn-group dropup">
+                                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                 <i class="fa fa-info"></i>
+                                                </button>
+                                                <div class="dropdown-menu" style="min-width:100px; padding: 7px;">
+                                                    <!-- Dropdown menu links -->
+                                                    <button style="width: 80px;"  class="btn btn-danger" onclick="removeItem({{ $m->id}}, 'maintenance')">Delete</button>
+                                                </div>
+                                            </div>
+                                        </td>
                                 </tr>
                             @endforeach
                             </tbody>
+                            
                         </table>
 
                     </div>
