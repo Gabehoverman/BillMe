@@ -29,10 +29,6 @@
                                 <input id="invisible_id" name="type" type="hidden" value="bill">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="columns">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Password</label>
-                                            <input name="bill_date" class="form-control" type="text" placeholder="Bill Date">
-                                        </div>
                                     <div class="form-group">
                                         <label class="label">Bill Date</label>
                                         <input name="bill_date" class="form-control" type="date" placeholder="Text input" value="bill_date">
