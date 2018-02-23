@@ -19,7 +19,7 @@ class Home extends Model
      * @var array
      */
     protected $fillable = [
-        'id','name','address'
+        'id','name','address','code'
     ];
 
     /**
@@ -43,5 +43,14 @@ class Home extends Model
 
     public function utilities() {
         return $this->hasMany('utilities');
+    }
+
+    public static function generateCode() {
+        return $code = uniqid();
+    }
+
+    public static function findByCode($code) {
+       $home = Home::where('code','=',$code)->first();
+       return $home;
     }
 }

@@ -2933,3 +2933,71 @@ nav li:active {
   background: #00d1b2 !important;
   opacity: 0.8;
 }
+
+/** Signup styles */
+
+.signup-bg {
+
+  background:  linear-gradient(
+    rgba(0, 209, 178, .75),
+    rgba(0, 209, 178, .75)
+  ),
+  /* bottom, image */
+  url('/assets/img/victorian.png');
+  padding: 100px;
+}
+
+.nav-tabs {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.nav-tabs li {
+  float: none;
+  width: 32.97%;
+  display: inline-block;
+}
+
+.nav-tabs li a {
+  padding: 10px 4rem;
+
+  border: none;
+}
+
+.nav-tabs li.active a, .nav-tabs li.active a:focus, .nav-tabs li.active a:hover  {
+
+  border: none;
+  color: white;
+  background: #00d1b2;
+  border-radius: 4px;
+}
+.nav-tabs li.active a:hover {
+  cursor: pointer;
+}
+
+.signup-card {
+  padding: 10px;
+}
+
+.signup-card .title{
+  padding:10px;
+  text-align: center;
+}
+
+.signup-card .btn {
+  margin: auto;
+align-items: right;
+}
+
+.tab {
+  color: #00d1b2;
+}
+
+.form-control {
+  color: #eeeeee;
+}
+
+.is-invalid {
+  border-color: red;
+  box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25)
+}

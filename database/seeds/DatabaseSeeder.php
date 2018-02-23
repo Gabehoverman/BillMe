@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Home;
 
 class DatabaseSeeder extends Seeder
 {
@@ -35,7 +36,9 @@ class FullTableSeeder extends Seeder {
         
         $home = array([
              'name' => 'Home',
-             'id' => 1
+             'id' => 1,
+             'code' => Home::generateCode(),
+             'address' => '1349 6th Ave'
          ]);
 
          DB::table('home')->insert($home);

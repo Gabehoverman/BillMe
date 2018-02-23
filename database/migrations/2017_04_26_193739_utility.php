@@ -18,7 +18,6 @@ class Utility extends Migration
             $table->string('name')->unique();
             $table->string('type');
             $table->integer('home_id');
-            $table->integer('bill_id');
         });
     }
 

@@ -19,7 +19,7 @@ class Utility extends Model
      * @var array
      */
     protected $fillable = [
-        'id','type','name','home_id','bill_id'
+        'id','type','name','home_id'
     ];
 
     /**

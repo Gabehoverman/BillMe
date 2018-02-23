@@ -16,6 +16,8 @@ class Home extends Migration
         Schema::create('home', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('name')->unique();
+            $table->string('address');
+            $table->string('code')->unique();
         });
     }
 

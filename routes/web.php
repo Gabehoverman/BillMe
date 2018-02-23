@@ -93,7 +93,13 @@ Route::get('MaterialDash', function() {
 	});
 
 
-//App URLs
+/**
+ * App URLs 
+ * Reworked with new controller, use these moving forward
+ */
+Route::get('{}', function() {
+    return(view('landing'));
+});
 Route::get('landing', function() {
     return(view('landing'));
 });
@@ -103,12 +109,17 @@ Route::get('app/maintenance', 'AppController@maintenance')->middleware('auth');
 Route::get('app/logout', 'AppController@logout')->middleware('auth');
 Route::get('app/dashboard', 'AppController@dashboard')->middleware('auth');
 Route::get('app/test', 'AppController@test')->middleware('auth');
+Route::get('newhome', function() {
+    return view('auth/signup');
+});
 
+Route::post('/register/new', 'Auth\RegisterController@new');
 Route::post('/app/bills', 'AppController@bills')->middleware('auth');
 Route::post('app/maintenance','AppController@maintenance')->middleware('auth');
 Route::post('app/maintenance/delete','AppController@deleteMaintenance');
 Route::post('app/bills/delete', 'AppController@deleteBill')->middleware('auth');
 Route::post('app/data/delete','AppController@delete')->middleware('auth');
+Route::post('app/home/check', 'AppController@checkHomeCode');
 
 Route::post('/post/test', function () {
     $data = "success";

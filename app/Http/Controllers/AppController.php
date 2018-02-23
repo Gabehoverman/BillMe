@@ -130,14 +130,14 @@ class AppController extends Controller
 	//Universal Delete Function
 	public function delete(Request $req) {
 		$type = $req->input();
-		return $type;
+		
 
 		//Check delete request type.
 		if ($type['type']== 'bill') {
 
 			try {
 				$bill = Bill::find($req->id);
-				//$bill->delete();
+				$bill->delete();
 				$response['code'] = 200;
 			} catch (Exception $e) {
 				$respose['code'] = 500;
@@ -149,7 +149,7 @@ class AppController extends Controller
 			
 			try {
 				$payment = Payment::find($req->id);
-				//$payment->delete();
+				$payment->delete();
 				$response['code'] = 200;
 			} catch (Exception $e) {
 				$respose['code'] = 500;
@@ -202,4 +202,19 @@ class AppController extends Controller
 		return ($bill);
 	}
 
+	/**
+	 *  Finds home based on code and returns home
+	 * 	Should call a get function on home and pass code value
+	 *  Returns 200 error if home cannot be found
+	 */
+	public function checkHomeCode(Request $req) {
+		$code = $req->input('homeCode');
+		$home  = Home::findByCode($code);
+		if ($home != null) {
+			return json_encode(200);
+		} else {
+			return json_encode($home);
+		}
+		
+	}
 }
