@@ -12,6 +12,10 @@
 */
 
 use App\Models\Maintenance;
+use App\Models\Home;
+use App\Models\Bill;
+use App\Models\Payment;
+use App\Models\CommentType;
 
 Route::get('/', function () {
     return view('Landing');
@@ -104,8 +108,11 @@ Route::get('landing', function() {
     return(view('landing'));
 });
 Route::get('app/user', 'AppController@user')->middleware('auth');
+Route::get('app/tasks','AppController@tasks')->middleware('auth');
 Route::get('app/bills', 'AppController@bills')->middleware('auth');
 Route::get('app/maintenance', 'AppController@maintenance')->middleware('auth');
+Route::get('app/posts','AppController@posts')->middleware('auth');
+Route::get('app/house','AppController@house')->middleware('auth');
 Route::get('app/logout', 'AppController@logout')->middleware('auth');
 Route::get('app/dashboard', 'AppController@dashboard')->middleware('auth');
 Route::get('app/test', 'AppController@test')->middleware('auth');
@@ -113,7 +120,8 @@ Route::get('newhome', function() {
     return view('auth/signup');
 });
 
-Route::post('/register/new', 'Auth\RegisterController@new');
+//Route::post('/register/new', 'Auth\RegisterController@new');
+Route::post('/register/new', 'AppController@newHouse');
 Route::post('/app/bills', 'AppController@bills')->middleware('auth');
 Route::post('app/maintenance','AppController@maintenance')->middleware('auth');
 Route::post('app/maintenance/delete','AppController@deleteMaintenance');
@@ -134,4 +142,52 @@ Route::get('Vue', function() {
 Route::get('Maintenance', function() {
     $data['maintenance'] = Maintenance::all();
     return($data);
+});
+
+//Single page app routes
+Route::get('app/spa', function() {
+    return view('app/spa');
+})->middleware('auth');
+
+Route::get('app/spa/{id}', function() {
+    return redirect('app/spa');
+});
+
+//Testing API Routes 
+Route::get('/api/v1/house/all', 'API\V1\HomeController@getAll');
+Route::resource('/api/v1/house','API\V1\HomeController');
+
+Route::get('/api/v1/maintenance/data','API\V1\MaintenanceController@allData');
+Route::get('/api/v1/maintenance/comments/{id}','API\V1\MaintenanceController@maintenanceComments');
+Route::resource('/api/v1/maintenance','API\V1\MaintenanceController');
+
+Route::get('/api/v1/alerts/data','API\V1\AlertController@allData');
+Route::resource('/api/v1/alerts','API\V1\AlertController');
+
+Route::get('/api/v1/payments/data','API\V1\PaymentController@allData');
+Route::get('/api/v1/payments/comments/{id}','API\V1\PaymentController@paymentComments');
+Route::resource('/api/v1/payments','API\V1\PaymentController');
+
+Route::get('/api/v1/bills/data','API\V1\BillController@allData');
+Route::get('api/v1/bills/comments/{id}','API\V1\BillController@billComments');
+Route::resource('/api/v1/bills','API\V1\BillController');
+
+Route::get('/api/v1/posts/data','API\V1\PostController@allData');
+Route::get('api/v1/posts/comments/{id}','API\V1\PostController@postComments');
+Route::resource('/api/v1/posts','API\V1\PostController');
+
+Route::get('/api/v1/tasks/data','API\V1\TaskController@allData');
+Route::get('api/v1/tasks/comments/{id}','API\V1\TaskController@taskComments');
+Route::resource('/api/v1/tasks','API\V1\TaskController');
+
+Route::get('/api/v1/comments/data','API\V1\CommentController@allData');
+Route::get('api/v1/comments/{type}/{id}','API\V1\CommentController@commenyByType');
+Route::resource('/api/v1/comments','API\V1\CommentController');
+
+Route::get('api/v1/user', function() {
+    $data['user'] = Auth::user();
+    $data['tenant'] = Auth::user()->tenant;
+    $data['house'] = Auth::user()->tenant->home;
+    $data['alerts'] = Auth::user()->alerts;
+    return $data;
 });

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+use Auth;
+use Carbon;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +21,7 @@ class Maintenance extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-		'id','tenant','active','notes'
+		'id','home_id','user_id','active','notes','completed'
 	];
 
 	/**
@@ -35,11 +37,7 @@ class Maintenance extends Model
 	 * @var array
 	 */
 	protected $hidden = [];
-
-
-	public $timestamps = false;
-
-
+	
 
 	public static function getAllCompleted() {
 		$maintenance = Maintenance::all();
@@ -54,6 +52,33 @@ class Maintenance extends Model
 		}
 
 	}
+
+	public function getHouse() {
+		return $this->belongsTo('App\Models\Home');
+	}
+
+	public function comments() {
+        return $this->hasMany('App\Models\Comment','item_id')->where('comment_type',CommentType::Maintenance);
+	}
+	
+	public function user() {
+		return $this->belongsTo('App\User');
+	}
+
+	public static function create($data) {
+
+        $Maintenance = new Maintenance;
+        $Maintenance->home_id = Auth::user()->home_id;
+        $Maintenance->user_id = Auth::user()->id;
+        $Maintenance->active = true;
+		$Maintenance->notes = $data->notes;
+		$Maintenance->completed = false;
+
+		$Maintenance->save();
+		
+        return $Maintenance;
+    }
+
 
 
 }

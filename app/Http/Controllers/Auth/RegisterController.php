@@ -72,6 +72,6 @@ class RegisterController extends Controller
     }
 
     public function new (Request $req) {
-        return $req->input();
+        return 1234;
     }
 }

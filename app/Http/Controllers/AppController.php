@@ -9,6 +9,8 @@ use App\Models\Tenant;
 use App\Models\Payment;
 use App\Models\Utility;
 use App\Models\Maintenance;
+use App\Models\Alert;
+use App\Models\AlertType;
 use ConsoleTVs\Charts\Builder\Chart;
 use ConsoleTVs\Charts\Facades\Charts;
 use Illuminate\Http\Request;
@@ -20,50 +22,72 @@ use Mockery\CountValidator\Exception;
 class AppController extends Controller
 {
 
+	/**
+	 * Main dashboard page
+	 */
 	public function dashboard() {
 
 		$data['pieChart'] = ChartHelper::PieChart();
 		$data['maintenance'] = Maintenance::all();
 		$data['chart'] = ChartHelper::UtilitiesChart();
+		$data['alerts'] = Auth::user()->tenant->home->alerts->take(7);
 
 		return view('app/dashboard',$data);
 	}
 
+	/**
+	 * Tasks & Todo page
+	 */
+	public function tasks() {
+		$data['tasks'] = Home::find(Auth::user())->tasks;
+		$data['alerts'] = Alert::where('home_id', Auth::user()->home_id)->where('alert_type',AlertType::Task)->orWhere('alert_type',AlertType::TaskComment)->get();
+		return view('app/tasks',$data);
+	}
+
+	/**
+	 * Shows bills/payments page
+	 * Saves bill/pamyent when there is a post request to it.
+	 */
 	public function bills(Request $req) {
 
 		$data['success'] = false;
 		$data['submission'] = "hello";
 		if ($req->type == 'bill' ) {
 			$bill = new Bill;
+			
 
 			$bill->amount = $req->get('amount', '');
-			$bill->bill_date = new \DateTime($req->get("bill_date"));
-			$bill->due_date = new \DateTime($req->get('due_date'));
+			$bill->home_id = Auth::user()->tenant->home->id;
+			$bill->date = new \DateTime($req->get("bill_date"));
 			$bill->utility_id = $req->get('recipient','');
 			$bill->image_url = "hello world";
-			$bill->month = $req->get('month');
 			$bill->active = false;
 			$bill->notes = $req->get('notes');
 
 			$bill->save();
 			$data['submission'] = 'bill';
 			$data['success'] = true;
+
+			Alert::createAlert(AlertType::Bill);
 		} 
 		 if ($req->type == 'payment') {
 			$payment = new Payment;
 
-			$payment->tenant_id = Auth::user()->tenant_id;
+			$payment->home_id = Auth::user()->home->id;
+			$payment->user_id = Auth::user()->id;
 			$payment->amount = $req->get('amount');
-			$payment->recipient_id = $req->get('recipient');
-			$payment->payment_date = new \DateTime($req->get("due_date"));
+			$payment->date = new \DateTime($req->get("due_date"));
 			$payment->image_url = 'null';
-			$payment->approved = false;
+			$payment->active = true;
 			$payment->notes = $req->get('notes');
 
 			$payment->save();
 
 			$data['submission'] = 'payment';
 			$data['success'] = true;
+
+			Alert::createAlert(AlertType::Payment);
+
 		}
 		
 		try {
@@ -80,16 +104,19 @@ class AppController extends Controller
 			
 		}
 
-		$payments = Payment::all();
-		foreach($payments as $payment) {
-			$tenant = Tenant::where('id','=',$payment->tenant_id)->first();
-			$payment['tenant'] =  $tenant->name;
-			foreach($utilities as $util) {
-				if ($payment->recipient_id == $util->id) {
-					$payment['utility'] = $util->name;
-				}
-			}
-		}
+		$payments = Home::find(Auth::user())->payments;
+
+		// $payments = Payment::all();
+		// foreach($payments as $payment) {
+		// 	$tenant = Tenant::where('id','=',$payment->tenant_id)->first();
+		// 	$payment['tenant'] =  $tenant->name;
+		// 	foreach($utilities as $util) {
+		// 		if ($payment->recipient_id == $util->id) {
+		// 			$payment['utility'] = $util->name;
+		// 		}
+		// 	}
+		// }
+		
 		$user = Auth::user();
 
 		$data['paymentSum'] = Payment::getAllPayments();
@@ -102,13 +129,17 @@ class AppController extends Controller
 		return(view('app/bills',$data));
 	}
 
+
+	/** 
+	 * Shows maintenance page
+	 */
 	public function maintenance(Request $req) {
 
 		$data['success'] = false;
 		if ($req->type == 'maintenance') {
 			$maintenance = new maintenance;
 
-			$user_id = Auth::user()->id;
+			$user_id = Auth::user()->tenant_id;
 			$username = Tenant::where('id','=',$user_id)->first();
 			$maintenance->tenant = $username->name;
 			$maintenance->notes = $req->get('notes');
@@ -126,11 +157,38 @@ class AppController extends Controller
 		return view('app/maintenance',$data);
 	}
 
+	/**
+	 * Show discussion page
+	 */
+	public function posts() {
+		$data['posts'] = Home::find(Auth::user())->posts;
+		$data['alerts'] = Home::find(Auth::user())->alerts->where('alert_type', AlertType::Post);
+		$data['alerts'] = Alert::where('home_id', Auth::user()->home_id)->where('alert_type',AlertType::Post)->orWhere('alert_type',AlertType::PostComment)->get();
+		return view('app/posts',$data);
+	}
 
-	//Universal Delete Function
+	/**
+	 * Returns house view with accompanying data
+	 */
+	public function house() {
+		$user = Auth::user();
+		$home = Auth::user()->tenant->home;
+		$data['tenants'] = $home->users;
+		//return $data;
+		return view('app/house', $data);
+	}
+
+	public function newHouse(Request $req) {
+		return $req->all();
+	}
+
+
+	/**
+	 * Asynchronous delete function
+	 * End point of all delete requests.
+	 */
 	public function delete(Request $req) {
 		$type = $req->input();
-		
 
 		//Check delete request type.
 		if ($type['type']== 'bill') {
@@ -176,11 +234,14 @@ class AppController extends Controller
 		
 	}
 
+	/**
+	 * Shows user page and accompanying data
+	 */
 	public function user() {
 		$user = Auth::user();
 		$data['user'] = $user;
-		$data['tenant'] = Tenant::where('id','=',$user->tenant_id)->first();
-		$data['home'] = Home::where('id','=',$data['tenant']->home_id)->first();
+		$data['tenant'] = $user->tenant;
+		$data['home'] = $user->tenant->home;
 
 		return view('app/user',$data);
 	}

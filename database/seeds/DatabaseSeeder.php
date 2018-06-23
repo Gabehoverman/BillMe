@@ -3,6 +3,9 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Home;
+use App\Models\CommentType;
+use App\Models\AlertType;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -38,19 +41,24 @@ class FullTableSeeder extends Seeder {
              'name' => 'Home',
              'id' => 1,
              'code' => Home::generateCode(),
-             'address' => '1349 6th Ave'
+             'address' => '1349 6th Ave',
+             'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+             'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
          ]);
 
          DB::table('home')->insert($home);
-         $this->command->info('seeded');
+         $this->command->info('Home seeded');
 
          $user_admin = array([
              'id' => 1,
-             'name' => 'Admin',
+             'first_name' => 'Admin',
+             'last_name' => '  ',
              'email' => 'Admin@Admin.com',
+             'home_id'=>1,
              'password' => Hash::make('password'),
              'role' => 'Admin',
-             'tenant_id' => 1
+             'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+             'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
          ]);
 
          DB::table('users')->insert($user_admin);
@@ -58,14 +66,220 @@ class FullTableSeeder extends Seeder {
          $tenant_admin = array([
             'id' => 1,
             'home_id' => 1,
+            'user_id' => 1,
             'name' => 'admin',
             'role' => 'admin',
             'move_in_date' => '2016-08-01',
             'move_out_date' => '2017-08-01',
             'active' => true,
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
         DB::table('tenant')->insert($tenant_admin);
+
+        $maintenance_req = array([
+            'id'=>1,
+            'home_id'=>1,
+            'user_id'=>1,
+            'completed'=>false,
+            'active'=>true,
+            'notes'=>'Our first maintenance request',
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('maintenance')->insert($maintenance_req);
+
+        $bill = array([
+            'id'=>1,
+            'home_id'=>1,
+            'utility_id'=>1,
+            'user_id'=>1,
+            'amount'=>'123.45',
+            'date'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'active'=>true,
+            'notes'=>'Bob the builder',
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('bill')->insert($bill);
+
+        $payment = array([
+            'id'=>1,
+            'home_id'=>1,
+            'user_id'=>1,
+            'amount'=>'123.45',
+            'notes'=>'Pretty cool payment',
+            'active'=>true,
+            'date'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('payment')->insert($payment);
+
+        $alert = array([
+            'id'=>1,
+            'home_id'=>1,
+            'user_id'=>1,
+            'alert_type' => AlertType::Bill,
+            'active'=>true,
+            'notes'=>'added a new bill',
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('alert')->insert($alert);
+
+        $alert = array([
+            'id'=>2,
+            'home_id'=>1,
+            'user_id'=>1,
+            'alert_type' => AlertType::Payment,
+            'active'=>true,
+            'notes'=>'added a new payment',
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('alert')->insert($alert);
+
+        $alert = array([
+            'id'=>3,
+            'home_id'=>1,
+            'user_id'=>1,
+            'alert_type' => AlertType::Maintenance,
+            'active'=>true,
+            'notes'=>'added a maintenance request',
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('alert')->insert($alert);
+
+        $alert = array([
+            'id'=>4,
+            'home_id'=>1,
+            'user_id'=>1,
+            'alert_type' => AlertType::Post,
+            'active'=>true,
+            'notes'=>'added a new post',
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('alert')->insert($alert);
+
+        $alert = array([
+            'id'=>5,
+            'home_id'=>1,
+            'user_id'=>1,
+            'alert_type' => AlertType::Task,
+            'active'=>true,
+            'notes'=>'added a new task',
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('alert')->insert($alert);
+
+        $alert = array([
+            'id'=>6,
+            'home_id'=>1,
+            'user_id'=>1,
+            'alert_type' => AlertType::PostComment,
+            'active'=>true,
+            'notes'=>'commented on a post',
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('alert')->insert($alert);
+
+        $alert = array([
+            'id'=>7,
+            'home_id'=>1,
+            'user_id'=>1,
+            'alert_type' => AlertType::TaskComment,
+            'active'=>true,
+            'notes'=>'commented on a task',
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('alert')->insert($alert);
+        
+        $comment = array([
+            'id'=>1,
+            'home_id'=>1,
+            'user_id'=>1,
+            'item_id'=>1,
+            'comment_type'=>CommentType::Bill,
+            'description'=>'I approve bill',
+            'active'=>true,
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('comment')->insert($comment);
+
+        $comment = array([
+            'id'=>2,
+            'home_id'=>1,
+            'user_id'=>1,
+            'item_id'=>1,
+            'comment_type'=>CommentType::Payment,
+            'description'=>'I approve payment',
+            'active'=>true,
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('comment')->insert($comment);
+
+        $task = array([
+            'id'=>1,
+            'home_id'=>1,
+            'user_id'=>1,
+            'title'=>'Do the dishes',            
+            'description'=>'Whoevers dishes are downstairs, please do them',
+            'completed'=>false,
+            'active'=>true,
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('task')->insert($task);
+
+        $task = array([
+            'id'=>2,
+            'home_id'=>1,
+            'user_id'=>1,
+            'title'=>'Take out the trash.',            
+            'description'=>'We need to take out the trash on Monday',
+            'completed'=>true,
+            'active'=>true,
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('task')->insert($task);
+
+        $post = array([
+            'id'=>2,
+            'home_id'=>1,
+            'user_id'=>1,
+            'title'=>'Can we upgrade our internet?',            
+            'description'=>'The internet is slow and Comcast has a cheaper new plan',
+            'active'=>true,
+            'created_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'=>Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('post')->insert($post);
+
 
         $this->call('UtilitySeederClass');
     }
@@ -79,6 +293,7 @@ class UserLoginSeeder extends Seeder
         $admin = array([
            'name' => 'Admin',
             'email' => 'Admin@Admin.com',
+            'home_id'=>1,
             "password"=> Hash::make('password'),
             'role' => 'Admin',
             'tenant_id' => 1
@@ -87,6 +302,7 @@ class UserLoginSeeder extends Seeder
         $tenant = array([
             'name' => 'Tenant',
             'email' => 'tenant@tenant.com',
+            'home_id'=>1,
             "password"=> Hash::make('password'),
             'role' => 'Tenant',
             'tenant_id' => 2

@@ -18,6 +18,7 @@ class Home extends Migration
             $table->string('name')->unique();
             $table->string('address');
             $table->string('code')->unique();
+            $table->timestamps();
         });
     }
 

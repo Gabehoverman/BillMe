@@ -37,19 +37,16 @@ class Tenant extends Model
      */
     protected $hidden = [];
 
-    public $timestamps = false;
-
-
     public function home() {
-        return $this->belongsTo('home');
+        return $this->belongsTo('App\Models\Home');
     }
 
     public function payments() {
-        return $this->hasMany('payments');
+        return $this->hasMany('App\Models\Payment');
     }
 
     public function user() {
-        return $this->belongsTo('user');
+        return $this->belongsTo('App\User');
     }
 
     public static function saveTenant($req) {
@@ -64,14 +61,10 @@ class Tenant extends Model
 
 			$tenant->save();
 
-		} catch(Exception $E) {
-			return $E;
+		} catch(Exception $e) {
+			return $e;
 	    }
 		return true;
-    }
-
-    public static function getTenantInfo() {
-
     }
 
 }

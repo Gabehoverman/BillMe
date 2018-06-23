@@ -15,14 +15,15 @@ class Bill extends Migration
     {
         Schema::create('bill', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+            $table->integer('home_id');
             $table->integer('utility_id');
+            $table->integer('user_id');
             $table->double('amount');
-            $table->date('bill_date');
-            $table->date('due_date');
-            $table->string('month');
-            $table->string('image_url');
+            $table->date('date')->nullable();
+            $table->string('image_url')->nullable();
             $table->boolean('active');
-            $table->string('notes');
+            $table->string('notes')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -33,6 +34,6 @@ class Bill extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('bill');
     }
 }

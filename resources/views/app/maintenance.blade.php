@@ -59,16 +59,16 @@
                             <th>Tenant</th>
                             <th>Notes</th>
                             <th>Completed</th>
-                            <th>Info</th>
+                            <th>Actions</th>
                             </thead>
                             <tbody>
                             @foreach($maintenance as $m)
                                 <tr id="{{ $m->id }}">
                                     <td>{{$m->id}}</td>
-                                    <td>{{$m->tenant}}</td>
+                                    <td>{{$m->user->first_name}}</td>
                                     <td>{{$m->notes}}</td>
                                     @if($m->active == 1)
-                                        <td><i class="fa fa-times"></i></td>
+                                        <td><i style="font-size:13pt; color: gray; text-align: center" class="fa fa-times-circle"></i></td>
                                     @else
                                         <td><i class="fa fa-check"></i></td>
                                     @endif

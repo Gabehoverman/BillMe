@@ -18,6 +18,7 @@ class Utility extends Migration
             $table->string('name')->unique();
             $table->string('type');
             $table->integer('home_id');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +29,6 @@ class Utility extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('utility');
     }
 }

@@ -73,7 +73,7 @@
                                 <th>Month</th>
                                 <th>Utility</th>
                                 <th>Paid</th>
-                                <th>Info</th>
+                                <th></th>
                                 </thead>
                                 <tbody>
                                 @foreach($bills as $bill)
@@ -92,7 +92,7 @@
                                         <!-- Default dropup button -->
                                         <div class="btn-group dropup">
                                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                             <i class="fa fa-info"></i>
+                                             <i class="fa fa-ellipsis-h table-icon"></i>
                                             </button>
                                             <div class="dropdown-menu" style="min-width:100px; padding: 7px;">
                                                 <!-- Dropdown menu links -->
@@ -125,13 +125,13 @@
                                 <th>Amount</th>
                                 <th>Utility</th>
                                 <th>Approved</th>
-                                <th>Info</th>
+                                <th></th>
                                 </thead>
                                 <tbody>
                                 @foreach($payments as $payment)
                                 <tr id="{{ $payment->id }}">
                                     <td>{{$payment->id}}</td>
-                                    <td>{{$payment->tenant}}</td>
+                                    <td>{{$payment->user->first_name }}</td>
                                     <td>{{$payment->amount}}</td>
                                     <td>{{$payment->utility}}</td>
                                     @if($payment->active == 1)
@@ -143,7 +143,7 @@
                                             <!-- Default dropup button -->
                                             <div class="btn-group dropup">
                                                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                 <i class="fa fa-info"></i>
+                                                <i class="fa fa-ellipsis-h table-icon"></i>
                                                 </button>
                                                 <div class="dropdown-menu" style="min-width:100px; padding: 7px;">
                                                     <!-- Dropdown menu links -->
@@ -162,7 +162,4 @@
             </div>
         </div>
         @include('ViewPartials/JsFunctions')
-
-
-
 @endsection

@@ -44,7 +44,7 @@
                                     <input name="amount" class="form-control" type="text" placeholder="input" value="123.45">
                                 </div>
                             
-                                <div class="col-md-6 form-group">
+                                <div class="col-md-12 form-group">
                                     <label class="label">Utility</label>
                                     <p class="control">
                                     <span class="select">
@@ -56,7 +56,7 @@
                                     </span>
                                     </p>
                                 </div>
-                                <div class="col-md-6 form-group">
+                                <!--<div class="col-md-6 form-group">
                                     <label class="label">Month</label>
                                     <p class="control">
                                     <span class="select">
@@ -76,7 +76,7 @@
                                       </select>
                                     </span>
                                     </p>
-                                </div>
+                                </div>-->
                             </div>
                             
                             <div class="form-group">

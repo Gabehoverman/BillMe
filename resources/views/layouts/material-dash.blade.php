@@ -50,27 +50,45 @@
 
         <div class="sidebar-wrapper">
             <div style="padding: 10px;" class="">
-                <a href="/" style="font-size: 20pt; color: white; padding: 15px; font-weight: bold">
+                <a href="/" class="logo-saas">
                     <img width="200px" src="../assets/img/housematelogosaas.png">
                 </a>
             </div>
             <ul class="nav">
-                <li class="">
+                <li>
                     <a href="/app/dashboard">
                         <i class="fa fa-trello"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
+                    <a href="/app/tasks">
+                        <i class="fa fa-clipboard"></i>
+                        <p>Tasks & Todo's</p>
+                    </a>
+                </li>
+                <li>
                     <a href="/app/bills">
                         <i class="fa fa-dollar"></i>
-                        <p>Bills</p>
+                        <p>Bills & Payments</p>
                     </a>
                 </li>
                 <li>
                     <a href="/app/maintenance">
                         <i class="fa fa-wrench"></i>
                         <p>Maintenance</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/app/posts">
+                        <i class="fa fa-comments"></i>
+                        <p>Discussions</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/app/house">
+                        <i class="fa fa-home"></i>
+                        <p>House</p>
                     </a>
                 </li>
                 <li>
@@ -139,7 +157,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <p class="font-heavy">
-                                    {{Auth::user()->name}}
+                                    {{Auth::user()->first_name}}
                                     <b class="caret"></b>
                                 </p>
                             </a>
@@ -200,7 +218,7 @@
 
 </body>
 <script>
-    $(function(){
+    function activeNav(){
         var current = location.pathname;
         $('.nav li a').each(function(){
             var $this = $(this);
@@ -210,7 +228,8 @@
                 $this.addClass('active-nav');
             }
         })
-    })
+    };
+    window.onload = activeNav;
 </script>
 
 <!--   Core JS Files   -->

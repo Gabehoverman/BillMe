@@ -15,12 +15,14 @@ class Tenant extends Migration
     {
         Schema::create('tenant', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+            $table->integer('user_id');
             $table->integer('home_id');
             $table->string('name')->unique();
             $table->string('role');
             $table->date('move_in_date');
             $table->date('move_out_date');
             $table->boolean('active');
+            $table->timestamps();
         });
     }
 
@@ -31,6 +33,6 @@ class Tenant extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('tenant');
     }
 }

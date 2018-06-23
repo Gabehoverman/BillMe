@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
+use Carbon;
 
 class Payment extends Model
 {
@@ -19,7 +21,7 @@ class Payment extends Model
      * @var array
      */
     protected $fillable = [
-        'id','recipient_id','tenant_id','payment_date','image_url','approved','notes'
+        'id','home_id','user_id','date','image_url','approved','notes','active','amount'
     ];
 
     /**
@@ -36,17 +38,36 @@ class Payment extends Model
      */
     protected $hidden = [];
 
-
-    public $timestamps = false;
-
-
     public function tenant() {
-        return $this->belongsTo('tenant');
+        return $this->belongsTo('App\Models\Tenant');
     }
 
-    /*public function utility() {
-        return $this->belongsTo('Utility');
-    }*/
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+
+    public function home() {
+        return $this->belongsTo('App\Models\Home');
+    }
+
+    public function comments() {
+        return $this->hasMany('App\Models\Comment','item_id')->where('comment_type',CommentType::Payment);
+    }
+
+    public static function create($data) {
+
+        $payment = new Payment;
+        $payment->home_id = Auth::user()->home_id;
+        $payment->user_id = Auth::user()->id;
+        $payment->active = true;
+        $payment->amount = $data->amount;
+        $payment->notes = $data->notes;
+        $payment->date = Carbon\Carbon::now();
+
+        $payment->save();
+
+        return $payment;
+    }
 
     public static function getPayments($user) {
         $payments = Payment::all()->where('tenant_id','=',$user->tenant_id);

@@ -9,9 +9,9 @@
     <title>House Mate | Registration</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/css/light-bootstrap-dashboard.css" rel="stylesheet">
-    <link href="../assets/css/signup.css" rel="stylesheet"> 
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/light-bootstrap-dashboard.css" rel="stylesheet">
+    <link href="/assets/css/signup.css" rel="stylesheet"> 
 
   </head>
 
@@ -188,9 +188,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../../../dist/js/bootstrap.min.js"></script>
-    <script src="../../../../assets/js/vendor/holder.min.js"></script>
+    <script src="/assets/js/vendor/popper.min.js"></script>
+    <script src="/dist/js/bootstrap.min.js"></script>
+    <script src="/assets/js/vendor/holder.min.js"></script>
     <script>
       // Example starter JavaScript for disabling form submissions if there are invalid fields
       (function() {
@@ -265,7 +265,7 @@
             method: 'POST',
             dataType: 'json',
             headers: {
-                'X-CSRF-TOKEN': "{{csrf_token()}}"
+                'X-CSRF-TOKEN': {{csrf_token()}}
             },
             data: {
                 homeCode: code,
@@ -301,24 +301,24 @@
       SendData(formData);
     };
 
-    function SendData(data) {
-      $.ajax({
-            url: '/register/new',
-            method: 'POST',
-            dataType: 'json',
-            headers: {
-                'X-CSRF-TOKEN': "{{csrf_token()}}"
-            },
-            data: {
-                data: data,
-            },
-            success: function( data, textStatus, jQxhr ){
-                console.log(data);
-            },
-            error: function( jqXhr, textStatus, errorThrown ){
-                console.log( errorThrown );
-            }  
+    function SendData(formData) {
+
+        fetch("/register/new",
+        {
+          method: "POST",
+          body: JSON.stringify(formData),
+          credentials: 'same-origin',
+          headers: new Headers({
+            'Content-Type': 'application/json',
+          })
         })
+        .then(function(res){ return res.json(); })
+        .then(function(data){ 
+          console.log( data ) 
+        }).catch(function(error) {
+          console.log(error);
+        });
+
     }
 
 

@@ -38,11 +38,43 @@ class Home extends Model
 
 
     public function tenants() {
-        return $this->hasMany('tenants');
+        return $this->hasMany('App\Models\Tenant');
+    }
+
+    public function users() {
+        return $this->hasMany('App\User');
     }
 
     public function utilities() {
-        return $this->hasMany('utilities');
+        return $this->hasMany('App\Models\Utility');
+    }
+
+    public function bills() {
+        return $this->hasMany('App\Models\Bill');
+    }
+
+    public function payments() {
+        return $this->hasMany('App\Models\Payment');
+    }
+
+    public function maintenance() {
+        return $this->hasMany('App\Models\Maintenance');
+    }
+
+    public function alerts() {
+        return $this->hasMany('App\Models\Alert');
+    }
+
+    public function tasks() {
+        return $this->hasMany('App\Models\Task');
+    }
+
+    public function posts() {
+        return $this->hasMany('App\Models\Post');
+    }
+
+    public function comments() {
+        return $this->hasMany('App\Models\Comment');
     }
 
     public static function generateCode() {
@@ -53,4 +85,5 @@ class Home extends Model
        $home = Home::where('code','=',$code)->first();
        return $home;
     }
+
 }

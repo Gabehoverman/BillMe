@@ -15,13 +15,14 @@ class Payment extends Migration
     {
         Schema::create('payment', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->integer('amount');
-            $table->integer('tenant_id');
-            $table->integer('recipient_id');
-            $table->date('payment_date');
-            $table->string('image_url');
-            $table->boolean('approved');
-            $table->string('notes');
+            $table->integer('home_id');
+            $table->integer('user_id');
+            $table->double('amount');
+            $table->date('date');
+            $table->string('image_url')->nullable();
+            $table->boolean('active');
+            $table->string('notes')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -32,6 +33,6 @@ class Payment extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('payment');
     }
 }

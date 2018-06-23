@@ -11,7 +11,7 @@ class ChartHelper {
 
 	public static function UtilitiesChart() {
 
-		$bill = Bill::where('bill_date','=','2017-05-12')->get();
+		$bill = Bill::where('date','=','2017-05-12')->get();
 
 		$chart = Charts::multi('areaspline', 'highcharts')
 		      ->title('Utilities')

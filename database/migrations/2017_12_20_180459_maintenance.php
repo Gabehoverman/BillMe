@@ -14,10 +14,13 @@ class Maintenance extends Migration
     public function up()
     {
         Schema::create('maintenance', function (Blueprint $table) {
-        	$table->increments('id')->unsigned();
-        	$table->string('tenant');
-        	$table->boolean('active');
-        	$table->string('notes');
+            $table->increments('id')->unsigned();
+            $table->integer('home_id');
+            $table->integer('user_id');
+            $table->boolean('completed');
+            $table->string('notes');
+            $table->boolean('active');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +31,6 @@ class Maintenance extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('maintenance');
     }
 }
